@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix Lodonsoft – Kurumsal Yazılım, Randevu \u0026 Proje Takip Platformu",
+  "description": "Lodonsoft kurumsal yazılım, mobil ve web çözümleri, interaktif proje takip sistemi, online randevu \u0026 teklif alma, otomatik faturalandırma ve güvenli ödeme portalı.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

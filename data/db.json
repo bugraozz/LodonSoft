@@ -1,0 +1,1483 @@
+{
+  "projects": [
+    {
+      "id": "trk-1",
+      "projectCode": "LOD-2026-01",
+      "title": "Aura Fintech – Çok Para Birimli Portalı",
+      "clientName": "Aura Capital AG",
+      "clientEmail": "billing@auracapital.com",
+      "leadArchitect": "Kaan Demir (Principal Tech Lead)",
+      "totalBudget": 180000,
+      "paidAmount": 120000,
+      "overallProgress": 46,
+      "currentStage": "development",
+      "startDate": "2026-08-10",
+      "estimatedDeliveryDate": "2026-11-20",
+      "stagingUrl": "https://staging.lodonsoft.com/aura",
+      "repositoryUrl": "https://github.com/lodonsoft/aura-fintech",
+      "milestones": [
+        {
+          "id": "m-1",
+          "stage": "discovery",
+          "title": {
+            "tr": "Mimari Keşif & Veri Tabanı Şeması",
+            "en": "Discovery & Schema Modeling"
+          },
+          "description": {
+            "tr": "Mikroservis tasarımı, WebSocket altyapısı ve SPK uyumluluk analizi.",
+            "en": "Microservice design, WebSockets specs, and FINMA compliance."
+          },
+          "progress": 100,
+          "completed": true,
+          "dueDate": "2026-08-25",
+          "completedDate": "2026-08-22",
+          "startDate": "2026-08-10"
+        },
+        {
+          "id": "m-2",
+          "stage": "design",
+          "title": {
+            "tr": "Figma UI/UX & Tasarım Sistemi",
+            "en": "Figma Design System"
+          },
+          "description": {
+            "tr": "Karanlık tema finans panelleri ve 42 adet responsive ekran tasarımı.",
+            "en": "Dark mode trading dashboard with 42 responsive views."
+          },
+          "progress": 100,
+          "completed": true,
+          "dueDate": "2026-09-15",
+          "completedDate": "2026-09-14",
+          "startDate": "2026-08-26"
+        },
+        {
+          "id": "m-3",
+          "stage": "development",
+          "title": {
+            "tr": "Ön Yüz & API Entegrasyonu (Aktif Sprint)",
+            "en": "Frontend & API Integration (Active)"
+          },
+          "description": {
+            "tr": "Döviz kuru grafikleri, cüzdan transferleri ve banka API servisleri.",
+            "en": "Real-time charts, multi-currency transfers, and banking APIs."
+          },
+          "progress": 75,
+          "completed": false,
+          "dueDate": "2026-10-25",
+          "startDate": "2026-09-16",
+          "completedDate": null
+        },
+        {
+          "id": "m-4",
+          "stage": "testing",
+          "title": {
+            "tr": "Penetrasyon & Yük Testleri",
+            "en": "Penetration & Stress Audits"
+          },
+          "description": {
+            "tr": "Siber güvenlik denetimleri ve 50.000 eşzamanlı kullanıcı stres testi.",
+            "en": "Security audits and 50k concurrent user load test."
+          },
+          "progress": 0,
+          "completed": false,
+          "dueDate": "2026-11-10",
+          "startDate": "2026-10-26"
+        },
+        {
+          "id": "m-5",
+          "stage": "deployment",
+          "title": {
+            "tr": "Canlı Ortama Geçiş & 7/24 İzleme",
+            "en": "Production Go-Live"
+          },
+          "description": {
+            "tr": "AWS Kubernetes kümesine sıfır kesintili dağıtım.",
+            "en": "Zero-downtime deployment to AWS Kubernetes clusters."
+          },
+          "progress": 0,
+          "completed": false,
+          "dueDate": "2026-11-20",
+          "startDate": "2026-11-11"
+        }
+      ],
+      "sprintTasks": [
+        {
+          "id": "t-1",
+          "title": {
+            "tr": "WebSocket derinlik tablosu gecikme optimizasyonu",
+            "en": "WebSocket order book latency optimization"
+          },
+          "status": "done",
+          "assignee": "Mert Akın"
+        },
+        {
+          "id": "t-2",
+          "title": {
+            "tr": "Biyometrik FaceID & TouchID modülü entegrasyonu",
+            "en": "Biometric FaceID & TouchID integration"
+          },
+          "status": "done",
+          "assignee": "Selin Kaya"
+        },
+        {
+          "id": "t-3",
+          "title": {
+            "tr": "3D Secure v2 kredi kartı ödeme geçidi testi",
+            "en": "3D Secure v2 credit card gateway testing"
+          },
+          "status": "in_progress",
+          "assignee": "Kaan Demir"
+        },
+        {
+          "id": "t-4",
+          "title": {
+            "tr": "Otomatik PDF hesap ekstresi motoru",
+            "en": "Automated PDF statement generation engine"
+          },
+          "status": "in_progress",
+          "assignee": "Deniz Yılmaz"
+        },
+        {
+          "id": "t-5",
+          "title": {
+            "tr": "Son aşama güvenlik sızma testi provası",
+            "en": "Final penetration testing drill"
+          },
+          "status": "planned",
+          "assignee": "Burak Can"
+        }
+      ],
+      "activities": [
+        {
+          "id": "act-1791757221164",
+          "timestamp": "Bugün",
+          "actor": "Lodonsoft Ekibi",
+          "action": {
+            "tr": "PostgreSQL veritabanı şeması ve bağlantı havuzu hazırlandı.",
+            "en": "PostgreSQL veritabanı şeması ve bağlantı havuzu hazırlandı."
+          }
+        },
+        {
+          "id": "act-1791756301218",
+          "timestamp": "Bugün",
+          "actor": "Lodonsoft Ekibi",
+          "action": {
+            "tr": "Güvenlik ve penetrasyon testleri başlatıldı.",
+            "en": "Güvenlik ve penetrasyon testleri başlatıldı."
+          }
+        },
+        {
+          "id": "act-1791756296277",
+          "timestamp": "Bugün",
+          "actor": "Lodonsoft Ekibi",
+          "action": {
+            "tr": "Güvenlik ve penetrasyon testleri başlatıldı.",
+            "en": "Güvenlik ve penetrasyon testleri başlatıldı."
+          }
+        },
+        {
+          "id": "act-1",
+          "timestamp": "Bugün, 11:20",
+          "actor": "Kaan Demir",
+          "action": {
+            "tr": "Ödeme entegrasyonu test ortamında 3D Secure onay testleri tamamlandı.",
+            "en": "Completed 3D Secure verification tests in staging."
+          }
+        },
+        {
+          "id": "act-2",
+          "timestamp": "Dün, 16:45",
+          "actor": "Selin Kaya",
+          "action": {
+            "tr": "Sprint 4 ara sürümü staging.lodonsoft.com/aura adresine dağıtıldı.",
+            "en": "Deployed Sprint 4 build to staging preview environment."
+          }
+        },
+        {
+          "id": "act-3",
+          "timestamp": "2 gün önce",
+          "actor": "Mert Akın",
+          "action": {
+            "tr": "Döviz çifti grafikleri için TradingView kütüphanesi bağlandı.",
+            "en": "Integrated TradingView charting canvas for fx pairs."
+          }
+        }
+      ],
+      "currentStageName": "Ön Yüz & API Entegrasyonu (Aktif Sprint)"
+    },
+    {
+      "id": "trk-2",
+      "projectCode": "LOD-2026-02",
+      "title": "Symase Health – Bulut Klinik Sistemi",
+      "clientName": "Symase Health Group",
+      "clientEmail": "it@symasehealth.com",
+      "leadArchitect": "Zehra Aydın (Cloud Architect)",
+      "totalBudget": 140000,
+      "paidAmount": 140000,
+      "overallProgress": 100,
+      "currentStage": "completed",
+      "startDate": "2026-05-01",
+      "estimatedDeliveryDate": "2026-09-15",
+      "stagingUrl": "https://staging.lodonsoft.com/symase",
+      "milestones": [
+        {
+          "id": "m-sym-1",
+          "stage": "discovery",
+          "title": {
+            "tr": "Kapsam & KVKK Analizi",
+            "en": "GDPR & Scope"
+          },
+          "description": {
+            "tr": "Tıbbi veri güvenliği protokolleri.",
+            "en": "Medical data security."
+          },
+          "progress": 100,
+          "completed": true,
+          "dueDate": "2026-05-15",
+          "completedDate": "2026-05-12",
+          "startDate": "2026-05-01"
+        },
+        {
+          "id": "m-sym-2",
+          "stage": "design",
+          "title": {
+            "tr": "Klinik Arayüzü Tasarımı",
+            "en": "Clinical UI Design"
+          },
+          "description": {
+            "tr": "Doktor ve hasta portali.",
+            "en": "Doctor & patient portal."
+          },
+          "progress": 100,
+          "completed": true,
+          "dueDate": "2026-06-10",
+          "completedDate": "2026-06-08",
+          "startDate": "2026-05-16"
+        },
+        {
+          "id": "m-sym-3",
+          "stage": "development",
+          "title": {
+            "tr": "WebRTC Video & DICOM",
+            "en": "WebRTC & DICOM"
+          },
+          "description": {
+            "tr": "Görüntüleme ve video görüşme.",
+            "en": "Imaging & consultations."
+          },
+          "progress": 100,
+          "completed": true,
+          "dueDate": "2026-08-01",
+          "completedDate": "2026-07-28",
+          "startDate": "2026-06-12"
+        },
+        {
+          "id": "m-sym-4",
+          "stage": "testing",
+          "title": {
+            "tr": "KVKK & Güvenlik Denetimi",
+            "en": "Compliance Audit"
+          },
+          "description": {
+            "tr": "Penetrasyon testleri.",
+            "en": "Penetration testing."
+          },
+          "progress": 100,
+          "completed": true,
+          "dueDate": "2026-08-20",
+          "completedDate": "2026-08-18",
+          "startDate": "2026-08-02"
+        },
+        {
+          "id": "m-sym-5",
+          "stage": "deployment",
+          "title": {
+            "tr": "Canlıya Alım & SLA",
+            "en": "Live Production"
+          },
+          "description": {
+            "tr": "14 hastanede aktif devreye alma.",
+            "en": "Live across 14 campuses."
+          },
+          "progress": 100,
+          "completed": true,
+          "dueDate": "2026-09-15",
+          "completedDate": "2026-09-12",
+          "startDate": "2026-08-22"
+        }
+      ],
+      "sprintTasks": [
+        {
+          "id": "t-sym-1",
+          "title": {
+            "tr": "Tüm testler ve canlıya geçiş tamamlandı",
+            "en": "All deployment tests passed"
+          },
+          "status": "done",
+          "assignee": "Zehra Aydın"
+        }
+      ],
+      "activities": [
+        {
+          "id": "act-sym-1",
+          "timestamp": "Eylül 2026",
+          "actor": "Zehra Aydın",
+          "action": {
+            "tr": "Proje başarıyla canlıya alındı, 6 aylık garanti SLA süreci başlatıldı.",
+            "en": "Project shipped to production. 6-month warranty SLA active."
+          }
+        }
+      ]
+    }
+  ],
+  "portfolio": [
+    {
+      "id": "proj-aura-fintech",
+      "title": "Aura Fintech – Çok Para Birimli Dijital Varlık Portalı",
+      "client": "Aura Capital AG (Zürich)",
+      "category": "web",
+      "categoryLabel": {
+        "tr": "Fintek & Web Sistemi",
+        "en": "Fintech & Web Platform"
+      },
+      "image": "/src/assets/images/project_fintech_mobile_1791573653377.jpg",
+      "summary": {
+        "tr": "Mikrosaniye gecikmeli emir iletimi, çoklu döviz cüzdanı ve otomatik SPK/FINMA uyumluluk kontrolleri içeren kurumsal bankacılık arayüzü.",
+        "en": "Enterprise digital banking cockpit handling multi-currency wallets, microsecond trade executions, and regulatory reporting."
+      },
+      "metrics": {
+        "tr": "+%140 İşlem Hacmi · 12.000+ Aktif Kurumsal Müşteri · %99.99 Erişilebilirlik",
+        "en": "+140% Monthly Volume · 12,000+ Active Accounts · 99.99% Availability"
+      },
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "WebSockets",
+        "PostgreSQL",
+        "Tailwind CSS",
+        "Docker"
+      ],
+      "year": "2026",
+      "demoUrl": "https://demo.lodonsoft.com/aura",
+      "caseStudy": {
+        "tr": "Eski monolitik bankacılık portalını mikroservislere bölerek sayfa açılış süresini 3.2 saniyeden 280 milisaniyeye indirdik. Otomatik 3D Secure ve çok faktörlü doğrulama entegre edildi.",
+        "en": "Modernized a legacy banking portal into modular micro-frontends, reducing load times from 3.2s to 280ms with 3D Secure authentication."
+      }
+    },
+    {
+      "id": "proj-symase-health",
+      "title": "Symase Health – Bulut Tabanlı Klinik & Tele-Tıp Sistemi",
+      "client": "Symase Health Group (İstanbul)",
+      "category": "cloud",
+      "categoryLabel": {
+        "tr": "Sağlık & Bulut Mimarisi",
+        "en": "Healthcare & Cloud"
+      },
+      "image": "/src/assets/images/project_healthtech_cloud_1791573664177.jpg",
+      "summary": {
+        "tr": "14 hastane ve 300+ doktorun anlık hasta takibi, radyoloji görüntüleme arşivi (DICOM) ve KVKK uyumlu şifreli tele-sağlık görüşmeleri.",
+        "en": "Hospital management platform uniting 14 medical campuses, DICOM radiology viewers, and encrypted tele-health video suites."
+      },
+      "metrics": {
+        "tr": "Günde 45.000+ Hasta Randevusu · %35 Muayene Süresi Tasarrufu · KVKK & HIPAA Uyumlu",
+        "en": "45,000+ Daily Patient Records · 35% Caregiver Time Saved · HIPAA & GDPR Compliant"
+      },
+      "technologies": [
+        "React",
+        "NestJS",
+        "WebRTC",
+        "AWS S3",
+        "Redis",
+        "PostgreSQL"
+      ],
+      "year": "2025",
+      "demoUrl": "https://demo.lodonsoft.com/symase",
+      "caseStudy": {
+        "tr": "Uçtan uca şifreli WebRTC altyapısıyla doktor-hasta video görüşmelerinde sıfır gecikme sağlandı. Otomatik e-reçete ve tahlil sonuç entegrasyonu tamamlandı.",
+        "en": "Engineered zero-latency encrypted WebRTC consultation rooms coupled with electronic health record syncing and billing."
+      }
+    },
+    {
+      "id": "proj-nexus-logistics",
+      "title": "Nexus Optima – Otonom Lojistik & Rota Optimizasyonu",
+      "client": "Nexus Global Logistics (Rotterdam)",
+      "category": "ai",
+      "categoryLabel": {
+        "tr": "Yapay Zeka & Filo Yönetimi",
+        "en": "AI & Fleet Intelligence"
+      },
+      "image": "/src/assets/images/project_logistics_ai_1791573675949.jpg",
+      "summary": {
+        "tr": "14.000+ kara ve deniz aracını anlık GPS ile harita üzerinde takip eden, yapay zeka ile yakıt ve süre tasarrufu sağlayan dağıtım platformu.",
+        "en": "Real-time global fleet tracking engine for 14,000+ transport assets with AI route and fuel optimization algorithms."
+      },
+      "metrics": {
+        "tr": "%18.4 Yakıt Tasarrufu · <10ms Telemetri Gecikmesi · 14.800 Aktif Araç",
+        "en": "18.4% Fleet Fuel Reduction · <10ms Telemetry Latency · 14,800 Active Assets"
+      },
+      "technologies": [
+        "React",
+        "Mapbox GL",
+        "Python",
+        "FastAPI",
+        "Kafka",
+        "Kubernetes"
+      ],
+      "year": "2026",
+      "demoUrl": "https://demo.lodonsoft.com/nexus",
+      "caseStudy": {
+        "tr": "Gerçek zamanlı trafik, hava durumu ve gümrük kapısı bekleme sürelerini işleyen yapay zeka modeliyle taşıma süreleri %22 kısaltıldı.",
+        "en": "Integrated live telemetry, port wait times, and weather patterns into a predictive dispatch model slashing transit durations by 22%."
+      }
+    }
+  ],
+  "services": [
+    {
+      "id": "srv-web",
+      "category": "web",
+      "number": "01",
+      "title": {
+        "tr": "Özel Web & Bulut Mimarisi",
+        "en": "Custom Web & Cloud Architecture"
+      },
+      "shortDesc": {
+        "tr": "Yüksek trafik ve ölçeklenebilirlik için tasarlanmış Next.js, Node.js ve mikroservis tabanlı web platformları.",
+        "en": "Modern high-throughput web systems engineered with Next.js, Node.js, and cloud-native microservices."
+      },
+      "longDesc": {
+        "tr": "Lodonsoft, sıfırdan kurumsal SaaS platformları, e-ticaret altyapıları ve performans odaklı web portalleri tasarlar. Tip güvenli kod tabanı, sıfır kesinti süreli CI/CD hatları ve dinamik önbellek katmanları kurarız.",
+        "en": "We build enterprise SaaS systems, digital commerce engines, and sub-second latency web platforms with type safety and resilient CI/CD pipelines."
+      },
+      "deliverables": {
+        "tr": [
+          "Mikroservis Mimarisi",
+          "SEO & Core Web Vitals Optimizasyonu",
+          "REST & GraphQL API Katmanı",
+          "Otomatik Test & CI/CD"
+        ],
+        "en": [
+          "Microservice Architecture",
+          "SEO & Core Web Vitals Optimization",
+          "REST & GraphQL API Layer",
+          "Automated Testing & CI/CD"
+        ]
+      },
+      "technologies": [
+        "React",
+        "Next.js",
+        "Node.js",
+        "PostgreSQL",
+        "Docker",
+        "AWS"
+      ],
+      "startingPrice": "₺45.000",
+      "duration": {
+        "tr": "3 - 6 Hafta",
+        "en": "3 - 6 Weeks"
+      }
+    },
+    {
+      "id": "srv-mobile",
+      "category": "mobile",
+      "number": "02",
+      "title": {
+        "tr": "Mobil Uygulama Geliştirme (iOS & Android)",
+        "en": "Mobile Application Engineering"
+      },
+      "shortDesc": {
+        "tr": "React Native & Swift / Kotlin ile native performans sunan, App Store ve Google Play onaylı mobil ekosistemler.",
+        "en": "High-performance iOS and Android applications built with React Native and native Swift/Kotlin modules."
+      },
+      "longDesc": {
+        "tr": "Kusursuz kullanıcı akışları, biyometrik kimlik doğrulama, çevrimdışı önbellekleme ve anlık bildirim sistemleriyle donatılmış, yüksek derecelendirmeli mobil uygulamalar.",
+        "en": "Intuitive user flows, offline-first caching, biometrics, and push notification architectures engineered for store featured apps."
+      },
+      "deliverables": {
+        "tr": [
+          "iOS & Android Mağaza Dağıtımı",
+          "Anlık Push Bildirim Entegrasyonu",
+          "Biyometrik Kimlik Doğrulama",
+          "Çevrimdışı Veri Eşitleme"
+        ],
+        "en": [
+          "App Store & Play Store Deployment",
+          "Real-time Push Notifications",
+          "Biometric Authentication",
+          "Offline-first Sync Engine"
+        ]
+      },
+      "technologies": [
+        "React Native",
+        "TypeScript",
+        "Swift",
+        "Kotlin",
+        "Firebase",
+        "GraphQL"
+      ],
+      "startingPrice": "₺55.000",
+      "duration": {
+        "tr": "4 - 8 Hafta",
+        "en": "4 - 8 Weeks"
+      }
+    },
+    {
+      "id": "srv-enterprise",
+      "category": "enterprise",
+      "number": "03",
+      "title": {
+        "tr": "Kurumsal Yazılım, ERP & CRM Çözümleri",
+        "en": "Enterprise ERP, CRM & Internal Systems"
+      },
+      "shortDesc": {
+        "tr": "Şirket içi iş akışlarını otomatikleştiren, güvenli veri ambarları ve yetkilendirme modellerine sahip kurumsal sistemler.",
+        "en": "Secure business automation, role-based workflows, and data orchestration platforms tailored for corporate operations."
+      },
+      "longDesc": {
+        "tr": "Çok şubeli, binlerce kullanıcılı şirketlerin sipariş, stok, muhasebe, fatura ve onay akışlarını tek ekranda toplayan yüksek güvenlikli ERP altyapıları.",
+        "en": "Unified multi-department management suites unifying billing, inventory, compliance approvals, and role-based access control."
+      },
+      "deliverables": {
+        "tr": [
+          "Detaylı Rol & Yetki Matrisi",
+          "e-Fatura & Muhasebe Entegrasyonu",
+          "Otomatik Raporlama Motoru",
+          "Veri Yedekleme & Felaket Kurtarma"
+        ],
+        "en": [
+          "Granular Role-Based Access Control",
+          "E-Invoice & Accounting Integration",
+          "Automated Reporting Engine",
+          "Disaster Recovery Plan"
+        ]
+      },
+      "technologies": [
+        "PostgreSQL",
+        "Redis",
+        "NestJS",
+        "Kubernetes",
+        "RabbitMQ",
+        "OAuth 2.0"
+      ],
+      "startingPrice": "₺75.000",
+      "duration": {
+        "tr": "6 - 12 Hafta",
+        "en": "6 - 12 Weeks"
+      }
+    },
+    {
+      "id": "srv-ai",
+      "category": "ai",
+      "number": "04",
+      "title": {
+        "tr": "Yapay Zeka & Akıllı Veri Analitiği",
+        "en": "Applied AI & Intelligent Analytics"
+      },
+      "shortDesc": {
+        "tr": "Büyük dil modelleri (LLM), tahminleme algoritmaları ve otomatik belge analiz sistemlerinin iş süreçlerine entegrasyonu.",
+        "en": "Integration of LLMs, predictive forecasting models, and automated document understanding into core business loops."
+      },
+      "longDesc": {
+        "tr": "Şirketinizin özel verisiyle beslenen RAG sistemleri, müşteri hizmetleri botları, anomali tespiti ve karar destek panelleri üretiyoruz.",
+        "en": "Bespoke retrieval-augmented generation pipelines, customer service AI workflows, and anomaly detection engines on private data."
+      },
+      "deliverables": {
+        "tr": [
+          "Özel Vektör Veritabanı Kurulumu",
+          "LLM Entegrasyonu & Prompt Mühendisliği",
+          "Tahminsel Talep & Ciro Modeli",
+          "Duygu & Metin Analizi API"
+        ],
+        "en": [
+          "Vector Database Setup",
+          "LLM Integration & Prompt Pipelines",
+          "Predictive Demand Models",
+          "NLP & Sentiment Analysis API"
+        ]
+      },
+      "technologies": [
+        "Python",
+        "LangChain",
+        "FastAPI",
+        "Pinecone",
+        "Gemini API",
+        "PyTorch"
+      ],
+      "startingPrice": "₺60.000",
+      "duration": {
+        "tr": "4 - 8 Hafta",
+        "en": "4 - 8 Weeks"
+      }
+    },
+    {
+      "id": "srv-uiux",
+      "category": "uiux",
+      "number": "05",
+      "title": {
+        "tr": "UI/UX & Dijital Ürün Tasarımı",
+        "en": "UI/UX & Digital Product Design"
+      },
+      "shortDesc": {
+        "tr": "Figma tasarım sistemleri, kullanıcı deneyimi araştırmaları ve yüksek dönüşüm oranlı prototip mimarisi.",
+        "en": "Scalable Figma design systems, usability research, and conversion-engineered interactive prototypes."
+      },
+      "longDesc": {
+        "tr": "Piksellerden öte; kullanıcı psikolojisi, erişilebilirlik (WCAG AA) standartları ve mühendisliğe birebir aktarılabilen tasarım token sistemleri kuruyoruz.",
+        "en": "From user testing to design tokens and interactive design systems aligned with engineering components."
+      },
+      "deliverables": {
+        "tr": [
+          "Tasarım Sistemi & Token Kütüphanesi",
+          "Tıklanabilir Figma Prototipi",
+          "Kullanılabilirlik Test Raporu",
+          "Mobil & Web Uyumlu Ekranlar"
+        ],
+        "en": [
+          "Design System & Token Library",
+          "Clickable Figma Prototype",
+          "Usability Testing Report",
+          "Responsive Desktop & Mobile Specs"
+        ]
+      },
+      "technologies": [
+        "Figma",
+        "Design Tokens",
+        "Tailwind",
+        "Storybook",
+        "Framer"
+      ],
+      "startingPrice": "₺35.000",
+      "duration": {
+        "tr": "2 - 4 Hafta",
+        "en": "2 - 4 Weeks"
+      }
+    },
+    {
+      "id": "srv-cloud",
+      "category": "cloud",
+      "number": "06",
+      "title": {
+        "tr": "DevOps, Bulut Mimarisi & Siber Güvenlik",
+        "en": "DevOps, Cloud Infrastructure & Security"
+      },
+      "shortDesc": {
+        "tr": "Terraform ile kod olarak altyapı (IaC), otomatik ölçeklenme, DDoS koruması ve penetrasyon testi denetimi.",
+        "en": "Infrastructure as Code (IaC) via Terraform, automated horizontal auto-scaling, and penetration audits."
+      },
+      "longDesc": {
+        "tr": "AWS, Google Cloud veya Azure üzerinde yüksek erişilebilirlikli (High Availability), sıfır tekil hata noktalı (No Single Point of Failure) sunucu mimarileri.",
+        "en": "High-availability, zero-single-point-of-failure infrastructure setups compliant with SOC2 and ISO 27001 standards."
+      },
+      "deliverables": {
+        "tr": [
+          "Terraform IaC Kod Dosyaları",
+          "Kayıt & Metrik İzleme (Prometheus/Grafana)",
+          "Penetrasyon & Güvenlik Denetim Raporu",
+          "Yedekleme & Failover Altyapısı"
+        ],
+        "en": [
+          "Terraform IaC Repositories",
+          "Observability (Prometheus/Grafana)",
+          "Penetration & Security Audit Report",
+          "Automated Failover Infrastructure"
+        ]
+      },
+      "technologies": [
+        "AWS",
+        "Google Cloud",
+        "Kubernetes",
+        "Terraform",
+        "Prometheus",
+        "Cloudflare"
+      ],
+      "startingPrice": "₺40.000",
+      "duration": {
+        "tr": "2 - 5 Hafta",
+        "en": "2 - 5 Weeks"
+      }
+    }
+  ],
+  "appointments": [
+    {
+      "id": "apt-1",
+      "trackingCode": "LOD-APP-8391",
+      "clientName": "Berk Taner",
+      "companyName": "Nova Finans Danışmanlık",
+      "email": "berk@novafinans.com",
+      "phone": "+90 532 450 11 22",
+      "serviceId": "srv-web",
+      "serviceName": "Özel Web & Bulut Mimarisi",
+      "date": "2026-10-15",
+      "timeSlot": "14:00",
+      "meetingType": "google_meet",
+      "notes": "Yeni nesil B2B portali için mimari planlama ve teklif görüşmesi.",
+      "status": "confirmed",
+      "createdAt": "2026-10-08T10:30:00Z"
+    },
+    {
+      "id": "apt-2",
+      "trackingCode": "LOD-APP-9214",
+      "clientName": "Dr. Zeynep Erdem",
+      "companyName": "Mediko Sağlık Çözümleri",
+      "email": "zeynep@medikoclinic.com",
+      "phone": "+90 533 112 33 44",
+      "serviceId": "srv-mobile",
+      "serviceName": "Mobil Uygulama Geliştirme (iOS & Android)",
+      "date": "2026-10-16",
+      "timeSlot": "11:00",
+      "meetingType": "zoom",
+      "notes": "Hasta randevu ve tahlil görüntüleme mobil uygulaması.",
+      "status": "pending",
+      "createdAt": "2026-10-09T08:15:00Z"
+    },
+    {
+      "id": "apt-3",
+      "trackingCode": "LOD-APP-7703",
+      "clientName": "Caner Özkan",
+      "companyName": "Atlas Depo & Lojistik",
+      "email": "caner@atlasdepo.com",
+      "phone": "+90 544 987 65 43",
+      "serviceId": "srv-enterprise",
+      "serviceName": "Kurumsal Yazılım, ERP & CRM Çözümleri",
+      "date": "2026-10-14",
+      "timeSlot": "16:00",
+      "meetingType": "office",
+      "notes": "Depo stok yönetimi ve e-fatura otomasyonu için yüz yüze toplantı.",
+      "status": "confirmed",
+      "createdAt": "2026-10-07T14:20:00Z"
+    }
+  ],
+  "quotes": [
+    {
+      "id": "qte-1",
+      "trackingCode": "LOD-QTE-2041",
+      "clientName": "Sarp Demir",
+      "companyName": "Vortex Medya A.Ş.",
+      "email": "sarp@vortexmedya.com",
+      "phone": "+90 535 678 90 12",
+      "selectedServices": [
+        "srv-web",
+        "srv-uiux"
+      ],
+      "budgetRange": "₺75.000 - ₺120.000",
+      "targetTimeline": "1 - 2 Ay",
+      "features": [
+        "Çok Dilli Altyapı",
+        "Özel İçerik Yönetimi (CMS)",
+        "SEO Optimizasyonu",
+        "Gelişmiş Form Entegrasyonları"
+      ],
+      "description": "Yüksek trafik alan haber ve video portalımızın Next.js ile baştan yazılması ve modern tasarım sistemi oluşturulması.",
+      "status": "proposal_sent",
+      "estimatedCost": "₺95.000",
+      "createdAt": "2026-10-06T11:00:00Z"
+    },
+    {
+      "id": "qte-2",
+      "trackingCode": "LOD-QTE-3105",
+      "clientName": "Elif Şimşek",
+      "companyName": "PayGlobal Ödeme Sistemleri",
+      "email": "elif@payglobal.io",
+      "phone": "+90 530 443 21 00",
+      "selectedServices": [
+        "srv-mobile",
+        "srv-cloud"
+      ],
+      "budgetRange": "₺150.000+",
+      "targetTimeline": "3 - 4 Ay",
+      "features": [
+        "3D Secure Ödeme Entegrasyonu",
+        "Biyometrik Giriş",
+        "PCI-DSS Seviye Güvenlik",
+        "Mikroservis Mimarisi"
+      ],
+      "description": "Fintech cüzdan uygulamamızın iOS ve Android sürümlerinin geliştirilmesi ve AWS bulutunda konuşlandırılması.",
+      "status": "reviewed",
+      "estimatedCost": "₺180.000",
+      "createdAt": "2026-10-08T15:45:00Z"
+    }
+  ],
+  "invoices": [
+    {
+      "id": "inv-1090",
+      "invoiceNumber": "LOD-2026-INV-1090",
+      "projectCode": "LOD-2026-02",
+      "clientName": "Symase Health Group",
+      "clientCompany": "Symase Health Group",
+      "clientTaxNo": "VKN: 4120983109",
+      "clientAddress": "Maslak Mah. Büyükdere Cad. No: 122, Sarıyer / İstanbul",
+      "clientEmail": "billing@symasehealth.com",
+      "issueDate": "2026-10-02",
+      "dueDate": "2026-10-15",
+      "items": [
+        {
+          "description": "Bulut Klinik Sistemi Canlıya Alım & 1. Faz SLA Bakım Bedeli",
+          "quantity": 1,
+          "unitPrice": 116666.67,
+          "total": 116666.67
+        }
+      ],
+      "subtotal": 116666.67,
+      "taxRate": 20,
+      "taxAmount": 23333.33,
+      "totalAmount": 140000,
+      "status": "paid",
+      "paymentMethod": "Kurumsal Havale / EFT",
+      "paidAt": "2026-10-04"
+    },
+    {
+      "id": "inv-1091",
+      "invoiceNumber": "LOD-2026-INV-1091",
+      "projectCode": "LOD-2026-01",
+      "clientName": "Aura Capital AG",
+      "clientCompany": "Aura Capital AG",
+      "clientTaxNo": "VKN: 8830129481",
+      "clientAddress": "Bahnhofstrasse 45, 8001 Zürich / İsviçre",
+      "clientEmail": "billing@auracapital.com",
+      "issueDate": "2026-08-15",
+      "dueDate": "2026-08-30",
+      "items": [
+        {
+          "description": "1. Faz Hakediş Bedeli: Mimari Keşif & DB Tasarımı",
+          "quantity": 1,
+          "unitPrice": 50000,
+          "total": 50000
+        },
+        {
+          "description": "UI/UX Prototip & Tasarım Sistemi Oluşturma",
+          "quantity": 1,
+          "unitPrice": 50000,
+          "total": 50000
+        }
+      ],
+      "subtotal": 100000,
+      "taxRate": 20,
+      "taxAmount": 20000,
+      "totalAmount": 120000,
+      "status": "paid",
+      "paymentMethod": "3D Secure Kredi Kartı",
+      "paidAt": "2026-08-18"
+    },
+    {
+      "id": "inv-1092",
+      "invoiceNumber": "LOD-2026-INV-1092",
+      "projectCode": "LOD-2026-01",
+      "clientName": "Aura Capital AG",
+      "clientCompany": "Aura Capital AG",
+      "clientTaxNo": "VKN: 8830129481",
+      "clientAddress": "Bahnhofstrasse 45, 8001 Zürich / İsviçre",
+      "clientEmail": "billing@auracapital.com",
+      "issueDate": "2026-10-01",
+      "dueDate": "2026-10-25",
+      "items": [
+        {
+          "description": "2. Faz Hakediş Bedeli: Ön Yüz & API Entegrasyonu",
+          "quantity": 1,
+          "unitPrice": 50000,
+          "total": 50000
+        }
+      ],
+      "subtotal": 50000,
+      "taxRate": 20,
+      "taxAmount": 10000,
+      "totalAmount": 60000,
+      "status": "pending"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "t-g1",
+      "clientName": "Burak Yılmaz",
+      "role": {
+        "tr": "Kurucu Ortak & CEO",
+        "en": "Co-Founder & CEO"
+      },
+      "company": "Nova B2B Pazaryeri",
+      "industry": {
+        "tr": "E-Ticaret & SaaS · İstanbul",
+        "en": "E-Commerce & SaaS · Istanbul"
+      },
+      "projectDelivered": {
+        "tr": "Mikroservis Tabanlı B2B Tedarik Portalı",
+        "en": "Microservices B2B Supply Chain Portal"
+      },
+      "metricHighlight": {
+        "tr": "5.0 / 5.0 Google İşletme Puanı · 3x Hızlı Sipariş Akışı",
+        "en": "5.0 / 5.0 Google Maps Rating · 3x Faster Checkout"
+      },
+      "quote": {
+        "tr": "Lodonsoft ekibiyle şirketimizin B2B e-ticaret altyapısını baştan geliştirdik. Süreç boyunca her sprint şeffaf şekilde takip edildi. Kod kalitesi ve mimari olağanüstü, canlıya geçişte sıfır kesinti yaşandı.",
+        "en": "We rebuilt our entire B2B e-commerce infrastructure with Lodonsoft. Every sprint was crystal-clear in their tracker. Outstanding architecture and zero-downtime release."
+      },
+      "outcome": {
+        "tr": "Sipariş işleme süreleri 4 dakikadan 45 saniyeye indi, müşteri memnuniyeti %98 oldu.",
+        "en": "Order processing reduced from 4 minutes to 45 seconds with 98% satisfaction."
+      },
+      "verifiedDate": "Ekim 2026",
+      "source": "google",
+      "rating": 5,
+      "status": "approved",
+      "googleReviewUrl": "https://maps.google.com/?cid=lodonsoft-reviews",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "t-g2",
+      "clientName": "Deniz Aksoy",
+      "role": {
+        "tr": "Ürün Direktörü",
+        "en": "Head of Product"
+      },
+      "company": "PayFlex Finansal Teknolojiler",
+      "industry": {
+        "tr": "Mobil Fintek · Ankara",
+        "en": "Mobile Fintech · Ankara"
+      },
+      "projectDelivered": {
+        "tr": "React Native iOS & Android Dijital Cüzdan",
+        "en": "React Native iOS & Android Digital Wallet"
+      },
+      "metricHighlight": {
+        "tr": "Google Play & App Store 4.9 Puan · 80K+ İndirme",
+        "en": "Google Play & App Store 4.9 Score · 80K+ Downloads"
+      },
+      "quote": {
+        "tr": "Mobil uygulamamızın App Store onay sürecinde ve mimari tasarımında gösterdikleri titizlik takdire şayan. 7/24 teknik destek ve son derece profesyonel bir mühendislik yaklaşımı.",
+        "en": "Their attention to detail during our App Store compliance review and biometric architecture was phenomenal. True engineering partners with 24/7 responsiveness."
+      },
+      "outcome": {
+        "tr": "İlk 60 günde 80.000 aktif kullanıcıya ulaşıldı ve tek bir çökme raporlanmadı.",
+        "en": "Reached 80,000 active users in 60 days with a 99.98% crash-free session rate."
+      },
+      "verifiedDate": "Eylül 2026",
+      "source": "google",
+      "rating": 5,
+      "status": "approved",
+      "googleReviewUrl": "https://maps.google.com/?cid=lodonsoft-reviews",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "t-g3",
+      "clientName": "Ece Çetin",
+      "role": {
+        "tr": "Operasyon Yöneticisi",
+        "en": "Operations Lead"
+      },
+      "company": "BulutNet Altyapı Çözümleri",
+      "industry": {
+        "tr": "Bulut & DevOps · İzmir",
+        "en": "Cloud & DevOps · Izmir"
+      },
+      "projectDelivered": {
+        "tr": "AWS Terraform IaC & Kubernetes Geçişi",
+        "en": "AWS Terraform IaC & Kubernetes Migration"
+      },
+      "metricHighlight": {
+        "tr": "%42 Bulut Maliyet Tasarrufu · 0 Kesinti",
+        "en": "42% Cloud Cost Reduction · Zero Downtime"
+      },
+      "quote": {
+        "tr": "Bulut optimizasyonu ve DevOps danışmanlığı aldık. AWS maliyetlerimiz %42 düştü, sistem performansı gözle görülür şekilde arttı. Kesinlikle tavsiye ederim.",
+        "en": "Retained Lodonsoft for cloud optimization. AWS monthly spend dropped by 42% while throughput doubled. Highly recommended."
+      },
+      "outcome": {
+        "tr": "Aylık sunucu faturası 14.000$ tasarruf sağladı ve otomatik yedekleme kuruldu.",
+        "en": "$14,000 monthly infra savings realized with automated disaster failover."
+      },
+      "verifiedDate": "Eylül 2026",
+      "source": "google",
+      "rating": 5,
+      "status": "approved",
+      "googleReviewUrl": "https://maps.google.com/?cid=lodonsoft-reviews",
+      "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "t-s1",
+      "clientName": "Kerem Alkan",
+      "role": {
+        "tr": "Genel Müdür Yardımcısı",
+        "en": "VP of Technology"
+      },
+      "company": "Solaria Enerji Sistemleri",
+      "industry": {
+        "tr": "Yeşil Enerji & IoT · Bursa",
+        "en": "Clean Tech & IoT · Bursa"
+      },
+      "projectDelivered": {
+        "tr": "Güneş Santrali IoT İzleme ve SCADA Web Portalı",
+        "en": "Solar IoT Telemetry & SCADA Web Cockpit"
+      },
+      "metricHighlight": {
+        "tr": "Teslim Sonrası NPS: 10/10 · Zamanında Teslim",
+        "en": "Post-Delivery NPS: 10/10 · On-Time Delivery"
+      },
+      "quote": {
+        "tr": "Projemiz teslim edildikten sonra doldurduğumuz bu anketi gururla paylaşıyoruz. Teslimat hızı, temiz kod disiplini ve Lodonsoft ekibinin sürekli bilgilendirme yapması bizi çok etkiledi. Harika bir iş birliği oldu!",
+        "en": "Proudly submitting this review upon project sign-off. Delivery speed, clean code discipline, and continuous transparency made this engagement effortless."
+      },
+      "outcome": {
+        "tr": "Santral arıza tespit süresi 4 saatten 3 dakikaya indirildi.",
+        "en": "Inverter anomaly alert latency slashed from 4 hours to 3 minutes."
+      },
+      "verifiedDate": "Ekim 2026",
+      "source": "client_survey",
+      "rating": 5,
+      "status": "approved",
+      "projectCode": "LOD-2026-08",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
+      "surveyRatings": {
+        "speed": 5,
+        "quality": 5,
+        "communication": 5,
+        "npsScore": 10
+      }
+    },
+    {
+      "id": "t-1",
+      "clientName": "Markus Vonberg",
+      "role": {
+        "tr": "Mali İşler Direktörü (CFO)",
+        "en": "Chief Financial Officer"
+      },
+      "company": "Aura Capital AG",
+      "industry": {
+        "tr": "Fintek & Varlık Yönetimi · Zürih",
+        "en": "Fintech & Asset Management · Zurich"
+      },
+      "projectDelivered": {
+        "tr": "Çok Para Birimli Bankacılık & Emir İletim Portalı",
+        "en": "Multi-Currency Trading & Custody Portal"
+      },
+      "metricHighlight": {
+        "tr": "+%140 İşlem Hacmi · 280ms Emir İletim Hızı",
+        "en": "+140% Monthly Volume · 280ms Execution Speed"
+      },
+      "quote": {
+        "tr": "Eski monolitik sistemimiz yoğun piyasa açılışlarında tıkanıyordu. Lodonsoft mimari ekibi tüm altyapıyı 8 haftada modern mikroservislere dönüştürdü. İşlem kapasitemiz katlandı ve FINMA uyumluluk denetiminden tek seferde geçtik.",
+        "en": "Our legacy monolithic platform choked under peak trading volatility. The Lodonsoft engineering squad re-architected our entire system into event-driven microservices in 8 weeks with flawless FINMA regulatory approval."
+      },
+      "outcome": {
+        "tr": "Aylık 12.000+ kurumsal hesapta sıfır işlem hatası ve kesintisiz 7/24 çalışma kararlılığı.",
+        "en": "Zero execution anomalies across 12,000+ corporate treasury accounts with continuous 99.99% uptime."
+      },
+      "verifiedDate": "Eylül 2026",
+      "source": "direct",
+      "rating": 5,
+      "status": "approved"
+    },
+    {
+      "id": "t-2",
+      "clientName": "Dr. Nilgün Karadağ",
+      "role": {
+        "tr": "Tıbbi Operasyonlar Direktörü",
+        "en": "Chief Medical Officer"
+      },
+      "company": "Symase Health Group",
+      "industry": {
+        "tr": "Sağlık & Tele-Tıp · İstanbul",
+        "en": "Healthcare & Telehealth · Istanbul"
+      },
+      "projectDelivered": {
+        "tr": "Bulut Klinik, DICOM Arşivi & WebRTC Teletıp Portalı",
+        "en": "Cloud Clinical System, DICOM & WebRTC Suite"
+      },
+      "metricHighlight": {
+        "tr": "45.000+ Günlük Hasta Kaydı · %35 Muayene Süresi Tasarrufu",
+        "en": "45,000+ Daily Records · 35% Caregiver Time Saved"
+      },
+      "quote": {
+        "tr": "14 hastanemizdeki hasta kabul, e-reçete ve radyoloji arşivini tek ekranda toplamak imkansız görünüyordu. Lodonsoft'un şeffaf proje takip portalı sayesinde her sprinti canlı test ederek, bütçe ve süre aşımı olmadan başardık.",
+        "en": "Consolidating patient intake, electronic prescriptions, and PACS imaging across 14 hospitals seemed insurmountable. Lodonsoft delivered on-schedule and under-budget through transparent bi-weekly sprint deploys."
+      },
+      "outcome": {
+        "tr": "Doktorların bürokratik işlem süresi %35 kısaldı, hasta memnuniyet skoru 4.9/5 seviyesine ulaştı.",
+        "en": "Reduced doctor documentation time by 35% while increasing patient satisfaction ratings to 4.9/5."
+      },
+      "verifiedDate": "Ağustos 2026",
+      "source": "direct",
+      "rating": 5,
+      "status": "approved"
+    },
+    {
+      "id": "t-3",
+      "clientName": "Willem de Boer",
+      "role": {
+        "tr": "Operasyon Direktörü (COO)",
+        "en": "Chief Operating Officer"
+      },
+      "company": "Nexus Global Logistics",
+      "industry": {
+        "tr": "Uluslararası Filo & Tedarik Zinciri · Rotterdam",
+        "en": "Fleet Logistics & Supply Chain · Rotterdam"
+      },
+      "projectDelivered": {
+        "tr": "Yapay Zeka Destekli Otonom Rota & Filo Dağıtım Portalı",
+        "en": "AI Autonomous Route & Dispatch Intelligence"
+      },
+      "metricHighlight": {
+        "tr": "%18.4 Yakıt Tasarrufu · <10ms Canlı Telemetri Gecikmesi",
+        "en": "18.4% Fleet Fuel Reduction · <10ms Live Telemetry"
+      },
+      "quote": {
+        "tr": "14.000 aracımızın rotalarını gerçek zamanlı hava ve gümrük verileriyle optimize eden yapay zeka altyapısını kurdular. Harita arayüzü son derece akıcı, mobil bildirim motoru kusursuz çalışıyor.",
+        "en": "They engineered the real-time AI dispatch system optimizing routes for 14,000 transport vehicles across Europe. The web cockpit is blazingly fast and telemetry latency is under 10ms."
+      },
+      "outcome": {
+        "tr": "Yıllık yakıt giderlerinde 1.2 milyon Euro tasarruf ve sevkiyat gecikmelerinde %22 düşüş.",
+        "en": "Generated €1.2M in annual fuel cost savings and slashed transit delays by 22%."
+      },
+      "verifiedDate": "Temmuz 2026",
+      "source": "direct",
+      "rating": 5,
+      "status": "approved"
+    },
+    {
+      "id": "t-4",
+      "clientName": "Sarp Demir",
+      "role": {
+        "tr": "Teknoloji Direktörü (CTO)",
+        "en": "Chief Technology Officer"
+      },
+      "company": "Vortex Medya A.Ş.",
+      "industry": {
+        "tr": "Dijital Medya & Yüksek Trafik · İstanbul",
+        "en": "Digital Media & Streaming · Istanbul"
+      },
+      "projectDelivered": {
+        "tr": "Next.js Tabanlı Yüksek Hızlı Haber & Video Altyapısı",
+        "en": "Next.js High-Throughput Media & Content Engine"
+      },
+      "metricHighlight": {
+        "tr": "4.2M Aylık Tekil Okuyucu · %98 Core Web Vitals Skoru",
+        "en": "4.2M Monthly Readers · 98 Core Web Vitals Score"
+      },
+      "quote": {
+        "tr": "Google Core Web Vitals skorlarımız kırmızıdaydı ve sayfa açılışlarımız yavaştı. Lodonsoft mimarisiyle sayfa yükleme süremiz 380 milisaniyeye düştü, reklam tıklanma oranlarımız ikiye katlandı.",
+        "en": "Our Google Core Web Vitals were in the red. Lodonsoft revamped our front-end architecture, bringing page render times under 380ms and doubling our ad revenue yield."
+      },
+      "outcome": {
+        "tr": "Organik Google arama trafiğinde 3 ay içinde %85 net büyüme ve 0 kesinti.",
+        "en": "85% organic Google search traffic surge within 3 months and zero server downtime during breaking news."
+      },
+      "verifiedDate": "Ekim 2026",
+      "source": "direct",
+      "rating": 5,
+      "status": "approved",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "t-s2",
+      "clientName": "Selin Vural",
+      "role": {
+        "tr": "Ürün Lideri",
+        "en": "Lead Product Manager"
+      },
+      "company": "FinCore Çözümleri",
+      "industry": {
+        "tr": "Bankacılık & Fintek · İstanbul",
+        "en": "Banking & Fintech · Istanbul"
+      },
+      "projectDelivered": {
+        "tr": "Açık Bankacılık & PSD2 Ödeme Ağ Geçidi",
+        "en": "Open Banking & PSD2 Payment Gateway"
+      },
+      "metricHighlight": {
+        "tr": "NPS: 10/10 · Zamanında ve Bütçesinde Teslimat",
+        "en": "NPS: 10/10 · On-Time & On-Budget Delivery"
+      },
+      "quote": {
+        "tr": "Proje teslimi sonrası uygulanan müşteri anketinde 10 üzerinden 10 puan verdik. Lodonsoft ekibi sprintleri harfiyen uyguladı ve güvenlik testlerini ilk seferde eksiksiz geçti.",
+        "en": "We rated 10 out of 10 on our post-delivery satisfaction survey. The Lodonsoft squad executed every sprint with military precision."
+      },
+      "outcome": {
+        "tr": "Tüm ödeme geçidi denetimleri BDDK standartlarında onaylandı.",
+        "en": "Payment compliance passed on first audit round."
+      },
+      "verifiedDate": "Eylül 2026",
+      "source": "client_survey",
+      "rating": 5,
+      "status": "approved",
+      "projectCode": "LOD-2026-09",
+      "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80",
+      "surveyRatings": {
+        "speed": 5,
+        "quality": 5,
+        "communication": 5,
+        "npsScore": 10
+      }
+    },
+    {
+      "id": "t-s3",
+      "clientName": "Mert Karacan",
+      "role": {
+        "tr": "CTO & Kurucu Ortak",
+        "en": "CTO & Co-Founder"
+      },
+      "company": "Omnia Lojistik A.Ş.",
+      "industry": {
+        "tr": "Akıllı Depo & Dağıtım · İzmir",
+        "en": "Smart Warehouse & Freight · Izmir"
+      },
+      "projectDelivered": {
+        "tr": "Gerçek Zamanlı Telemetri & Otonom Rota Motoru",
+        "en": "Real-Time Telemetry & Dispatch System"
+      },
+      "metricHighlight": {
+        "tr": "Müşteri Memnuniyeti: 5/5 · Sıfır Hata Oranı",
+        "en": "Client Rating: 5/5 · Zero Defect Rate"
+      },
+      "quote": {
+        "tr": "Lodonsoft ile çalışmak yazılım süreçlerimizi tamamen rahatlattı. Canlı proje takip panelinden her gün ilerlemeyi izledik, teslimat anketinde tam puan vermekten mutluluk duyduk.",
+        "en": "Working with Lodonsoft simplified our engineering lifecycle. We monitored daily progress on their live tracker and gladly gave top scores."
+      },
+      "outcome": {
+        "tr": "Depo yükleme verimliliği %28 artış gösterdi.",
+        "en": "Warehouse throughput surged by 28%."
+      },
+      "verifiedDate": "Ekim 2026",
+      "source": "client_survey",
+      "rating": 5,
+      "status": "approved",
+      "projectCode": "LOD-2026-11",
+      "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80",
+      "surveyRatings": {
+        "speed": 5,
+        "quality": 5,
+        "communication": 5,
+        "npsScore": 10
+      }
+    },
+    {
+      "id": "t-g4",
+      "clientName": "Tolga Keskin",
+      "role": {
+        "tr": "Teknoloji Müdürü",
+        "en": "Tech Manager"
+      },
+      "company": "Artisan Tasarım & Mobilya",
+      "industry": {
+        "tr": "E-Ticaret · İstanbul",
+        "en": "E-Commerce · Istanbul"
+      },
+      "projectDelivered": {
+        "tr": "Next.js 3D Konfigüratör & E-Ticaret Portalı",
+        "en": "Next.js 3D Configurator & Commerce Engine"
+      },
+      "metricHighlight": {
+        "tr": "5.0 Google Değerlendirmesi · %210 Sepet Büyümesi",
+        "en": "5.0 Google Rating · 210% Cart Growth"
+      },
+      "quote": {
+        "tr": "Google yorumlarına bakarak Lodonsoft ile iletişime geçmiştik. Beklentimizin kat kat üzerinde bir mühendislik kalitesiyle karşılaştık. Süreç boyunca her detay belgelendi ve zamanından önce teslim edildi.",
+        "en": "Found Lodonsoft through Google reviews. The engineering quality far exceeded our expectations. Every milestone was documented and delivered ahead of schedule."
+      },
+      "outcome": {
+        "tr": "Web sitesi dönüşüm oranlarımız %2.1'den %4.8'e yükseldi.",
+        "en": "Conversion rate surged from 2.1% to 4.8% post-launch."
+      },
+      "verifiedDate": "Ekim 2026",
+      "source": "google",
+      "rating": 5,
+      "status": "approved",
+      "googleReviewUrl": "https://maps.google.com/?cid=lodonsoft-reviews",
+      "avatar": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=150&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "t-g5",
+      "clientName": "Gizem Yurt",
+      "role": {
+        "tr": "Pazarlama & Büyüme Direktörü",
+        "en": "Growth Director"
+      },
+      "company": "FinTrack Kişisel Bütçe",
+      "industry": {
+        "tr": "Mobil Uygulama · Ankara",
+        "en": "Mobile App · Ankara"
+      },
+      "projectDelivered": {
+        "tr": "Cross-Platform Finans Mobil Uygulaması",
+        "en": "Cross-Platform Personal Finance Mobile App"
+      },
+      "metricHighlight": {
+        "tr": "5.0 Google Değerlendirmesi · 4.9 App Store Skoru",
+        "en": "5.0 Google Rating · 4.9 App Store Score"
+      },
+      "quote": {
+        "tr": "Finansal veri güvenliği ve banka API entegrasyonlarında Lodonsoft ekibinin tecrübesi işimizi inanılmaz kolaylaştırdı. Kesinlikle Türkiye'nin en yetkin yazılım geliştirme ekiplerinden biri.",
+        "en": "Their banking API experience made financial data compliance seamless. Truly one of the elite software engineering partners in the region."
+      },
+      "outcome": {
+        "tr": "Açık bankacılık entegrasyonu 3 haftada tamamlandı ve BDDK onayından geçti.",
+        "en": "Open banking integration completed in 3 weeks with full regulatory clearance."
+      },
+      "verifiedDate": "Eylül 2026",
+      "source": "google",
+      "rating": 5,
+      "status": "approved",
+      "googleReviewUrl": "https://maps.google.com/?cid=lodonsoft-reviews",
+      "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "t-5",
+      "clientName": "Canberk Öz",
+      "role": {
+        "tr": "Altyapı & Güvenlik Lideri",
+        "en": "Infra & Security Lead"
+      },
+      "company": "SecureCloud Sistemleri",
+      "industry": {
+        "tr": "Bulut Güvenliği · Ankara",
+        "en": "Cloud Security · Ankara"
+      },
+      "projectDelivered": {
+        "tr": "Kubernetes Multi-Cluster Yönetim Paneli",
+        "en": "Kubernetes Multi-Cluster Control Plane"
+      },
+      "metricHighlight": {
+        "tr": "ISO 27001 Uyumlu · %99.99 SLA",
+        "en": "ISO 27001 Certified · 99.99% SLA"
+      },
+      "quote": {
+        "tr": "Kurumsal seviyede yüksek erişilebilirlik ve mikroservis mimarisinde Lodonsoft'un sunduğu çözümler bizi sektörde 2 adım öne geçirdi. Gerçek profesyoneller.",
+        "en": "In high-availability and microservices architectures, Lodonsoft catapulted our capabilities two steps ahead of the competition. True professionals."
+      },
+      "outcome": {
+        "tr": "Müşteri yanıt gecikmesi 45 milisaniyenin altına çekildi.",
+        "en": "Customer latency dropped beneath 45ms."
+      },
+      "verifiedDate": "Ağustos 2026",
+      "source": "direct",
+      "rating": 5,
+      "status": "approved",
+      "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&auto=format&fit=crop&q=80"
+    }
+  ],
+  "settings": {
+    "companyName": "Lodonsoft Yazılım Teknolojileri A.Ş.",
+    "legalEntityName": "Lodonsoft Dijital Çözümler ve Bilişim San. Tic. A.Ş.",
+    "taxNumber": "6090871234",
+    "taxOffice": "Maslak Vergi Dairesi",
+    "crNumber": "İstanbul Ticaret Sicili - 349182/5",
+    "mersisNumber": "0609087123400001",
+    "supportEmail": "destek@lodonsoft.com",
+    "billingEmail": "muhasebe@lodonsoft.com",
+    "phone": "+90 (212) 890 40 50",
+    "whatsappNumber": "+90 (532) 100 20 30",
+    "address": "Büyükdere Cad. No: 199, Levent 199 K: 24, Şişli / İstanbul",
+    "establishedYear": "2021",
+    "defaultCurrency": "TRY",
+    "defaultTaxRate": 20,
+    "baseHourlyRate": 2500,
+    "minimumProjectBudget": 75000,
+    "minimumDepositPercent": 35,
+    "techLeadHourlyRate": 3500,
+    "seniorDevHourlyRate": 2500,
+    "uiuxLeadHourlyRate": 2200,
+    "rushDeliveryMultiplier": 1.5,
+    "mvpComplexityMultiplier": 0.8,
+    "enterpriseMultiplier": 1.8,
+    "cashPaymentDiscountPercent": 10,
+    "defaultSprintDurationWeeks": 2,
+    "warrantyDurationMonths": 6,
+    "guaranteedSlaResponseHours": 2,
+    "autoDeployStaging": true,
+    "strictCodeReviewEnforced": true,
+    "backupFrequencyHours": 12,
+    "primaryCloudProvider": "gcp",
+    "serverRegion": "europe-west3 (Frankfurt)",
+    "ddosProtectionLevel": "balanced",
+    "deploymentStrategy": "blue_green",
+    "autoSslRenewal": true,
+    "sentryDsn": "https://lodonsoft_sentry@o450.ingest.sentry.io/78912",
+    "logLevel": "INFO",
+    "customDomain": "lodonsoft.com",
+    "lastDeploymentTime": "10 Ekim 2026, 17:15",
+    "deploymentEnvironment": "production",
+    "smsProvider": "netgsm",
+    "smsApiUser": "8503082910",
+    "smsApiKey": "lod_sms_sec_9918237",
+    "smsSenderId": "LODONSOFT",
+    "smsBalance": 4850,
+    "smsEnabled": true,
+    "smsNotifyPaymentReminder": true,
+    "smsNotifyProjectUpdate": true,
+    "smsNotifyNewQuote": true,
+    "smsNotifyAppointmentReminder": true,
+    "smsAppointmentReminderHours": 2,
+    "smsPaymentTemplate": "Sayın {musteri_adi}, {proje_adi} projenize ait ₺{tutar} tutarındaki vadesi gelen faturanız düzenlenmiştir. Güvenli ödeme ve detaylar: https://odeme.lodonsoft.com/{fatura_no} - Lodonsoft",
+    "smsProjectUpdateTemplate": "Sayın {musteri_adi}, {proje_adi} projenizin '{asama_adi}' etabı başarıyla tamamlandı ve test ortamına alındı. Detaylar: https://portal.lodonsoft.com/p/{proje_kodu} - Lodonsoft",
+    "smsQuoteTemplate": "Sayın {musteri_adi}, hazırlanan yeni projenize ait resmi şartname ve teklif onayınıza sunulmuştur: https://lodonsoft.com/teklif/{teklif_no} - Lodonsoft",
+    "smsAppointmentTemplate": "Sayın {musteri_adi}, {tarih} saat {saat} online proje keşif ve mimari toplantınızı hatırlatırız. Bağlantı: https://meet.google.com/lod-arch-2026 - Lodonsoft",
+    "googleMapsCid": "lodonsoft-reviews",
+    "googlePlacesApiKey": "AIzaSyDemoLodonSoftMapsKey_482910",
+    "autoSyncGoogleReviews": true,
+    "syncFrequencyHours": 24,
+    "slackWebhookUrl": "https://hooks.slack.com/services/T00/B00/lodonsoft-alerts",
+    "discordWebhookUrl": "https://discord.com/api/webhooks/109823/lodonsoft-bot",
+    "notifyOnNewAppointment": true,
+    "notifyOnNewQuote": true,
+    "notifyOnPaymentReceived": true,
+    "smtpHost": "smtp.lodonsoft.com",
+    "smtpPort": 587,
+    "smtpUser": "noreply@lodonsoft.com",
+    "smtpSenderName": "Lodonsoft Mühendislik Bildirim",
+    "paymentGatewayMode": "live",
+    "enforce3dSecure": true,
+    "autoSendWelcomeEmail": true,
+    "appointmentReminderHours": 24,
+    "quoteFollowUpDays": 3,
+    "invoiceOverdueWarningDays": 1,
+    "whatsappAutoResponder": true,
+    "whatsappTemplateTr": "Merhaba, Lodonsoft Mühendislik talebinizi aldık. Kısa süre içinde teknik mimarımız sizinle iletişime geçecektir.",
+    "autoSurveyRequestOnCompletion": true,
+    "siteMetaTitleTr": "Lodonsoft | Üst Düzey Yazılım & Dijital Ürün Stüdyosu",
+    "siteMetaTitleEn": "Lodonsoft | High-End Software & Digital Product Studio",
+    "siteMetaDescriptionTr": "Kurumsal web uygulamaları, ölçeklenebilir bulut mimarileri ve yüksek performanslı mobil çözümler geliştiren yeni nesil mühendislik stüdyosu.",
+    "siteMetaDescriptionEn": "Next-generation engineering studio crafting enterprise web platforms, scalable cloud systems, and high-performance mobile apps.",
+    "googleAnalyticsId": "G-LODON2026",
+    "metaPixelId": "8923489102834",
+    "ogImageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
+    "enableStructuredData": true,
+    "requireNdaBeforeDiscovery": true,
+    "ipTransferClauseEnabled": true,
+    "gdprDataRetentionMonths": 24,
+    "slaUptimeGuaranteePercent": 99.9,
+    "privacyPolicyContent": "LODONSOFT BİLİŞİM TEKNOLOJİLERİ A.Ş. GİZLİLİK POLİTİKASI\n\n1. GENEL BİLGİLENDİRME VE KAPSAM\nLodonsoft Bilişim Teknolojileri A.Ş. (\"Lodonsoft\" veya \"Şirket\"), kullanıcılarımızın ve kurumsal müşterilerimizin kişisel verilerinin korunmasına, gizliliğine ve bilgi güvenliğine azami özen göstermektedir. Bu Gizlilik Politikası, lodonsoft.com web sitesini, müşteri takip portalını, randevu ve teklif platformlarını ziyaret eden veya kullanan tüm gerçek ve tüzel kişilerin verilerinin nasıl işlendiğini, saklandığını ve korunduğunu açıklar.\n\n2. TOPLANAN VERİLER VE TOPLAMA YÖNTEMLERİ\nPlatformumuz üzerinden aşağıdaki kategorilerde veriler toplanabilmektedir:\n- İletişim & Kimlik Bilgileri: Ad, soyad, kurumsal unvan, kurumsal e-posta adresi, telefon numarası.\n- Talep & Proje Verileri: Seçilen hizmetler, bütçe aralıkları, proje gereksinimleri, teknik şartnameler ve toplantı notları.\n- İşlem ve Güvenlik Kayıtları: IP adresi, tarayıcı türü, oturum açma zaman damgaları, takip kodu sorguları ve sistem denetim izleri (Audit Logs).\n- Finansal Bilgiler: Fatura unvanı, vergi dairesi/numarası ve ödeme dekont/işlem referansları.\n\n3. VERİ İŞLEME AMAÇLARI\nToplanan veriler şu amaçlarla işlenmektedir:\n- Yazılım mühendisliği, ürün tasarımı ve danışmanlık tekliflerinin hazırlanması ve sunulması,\n- Müşteri randevularının organize edilmesi, takvime işlenmesi ve onay bildirimlerinin iletilmesi,\n- Canlı proje takip portalı üzerinden sprint görevlerinin, kilometre taşlarının ve ilerleme raporlarının şeffafça paylaşılması,\n- Yasal mevzuattan kaynaklanan faturalandırma, muhasebe ve sözleşmesel yükümlülüklerin yerine getirilmesi,\n- Sistem güvenliğinin temini, kötüye kullanım ve siber saldırıların engellenmesi.\n\n4. BİLGİ GÜVENLİĞİ VE ŞİFRELEME STANDARTLARI\nTüm veri iletimleri uçtan uca TLS 1.3 ve 256-bit SSL şifreleme protokolleriyle korunmaktadır. Verilerimiz ISO 27001 ve SOC 2 sertifikalı, yüksek güvenlikli bulut altyapılarında barındırılmaktadır.\n\n5. ÇEREZLER (COOKIES)\nKullanıcı deneyimini iyileştirmek, dil tercihlerini (Türkçe/İngilizce) hatırlamak ve portal oturum güvenliğini sağlamak amacıyla zorunlu ve işlevsel çerezler kullanılmaktadır.\n\n6. HAKLARINIZ VE İLETİŞİM\nKVKK ve ilgili veri koruma mevzuatı kapsamındaki tüm talepleriniz için destek@lodonsoft.com adresine yazılı bildirimde bulunabilirsiniz.",
+    "termsOfServiceContent": "LODONSOFT YAZILIM & TEKNOLOJİ KULLANIM KOŞULLARI VE HİZMET SÖZLEŞMESİ\n\n1. SÖZLEŞMENİN TARAFLARI VE YÜRÜRLÜK\nİşbu Kullanım Koşulları ve Hizmet Şartları, merkezi Büyükdere Caddesi No:198 Levent/İstanbul adresinde mukim Lodonsoft Bilişim Teknolojileri A.Ş. ile Lodonsoft platformlarını kullanan, teklif alan veya sözleşme akdeden müşteriler arasında yürürlüktedir. Platformun kullanımı işbu şartların gayrikabili rücu kabulü anlamına gelir.\n\n2. TEKLİF, BAŞLANGIÇ VE ÖDEME ŞARTLARI\n- Hazırlanan tüm fiyat teklifleri ve bütçe tahminleri, sistemde belirlenen saatlik mühendislik baz ücreti ve proje kapsamı üzerinden hesaplanır.\n- Bir projenin geliştirme takvimine alınabilmesi için taraflarca mutabık kalınan minimum peşinat tutarının ödenmiş olması zorunludur.\n- Kalan bakiye, proje teslim aşamalarına (milestone/hakediş) veya mutabık kalınan vadeli ödeme planına göre tahsil edilir. Peşin ödemelerde sistemde tanımlı nakit indirimi uygulanır.\n\n3. FİKRİ MÜLKİYET HAKLARI (IP TRANSFER)\n- Projeye ait kaynak kodlar, mimari şemalar, UI/UX tasarım dosyaları ve fikri haklar; ilgili projeye ait fatura bedelinin ve tüm hakedişlerin eksiksiz olarak ödenmesi şartıyla müşteriye devredilir.\n- Lodonsoft'un tescilli çekirdek kütüphaneleri ve genel amaçlı altyapı modülleri haricinde, projeye özel üretilen tüm kod blokları müşterinin münhasır mülkiyetindedir.\n\n4. DEĞİŞİKLİK VE KAPSAM YÖNETİMİ (CHANGE REQUEST)\nSözleşme başlangıcında belirlenen mimari kapsam ve kullanıcı hikayeleri dışındaki ek talepler, yeni analiz oturumu ve ilave saatlik efor üzerinden değerlendirilerek revizyon teklifine bağlanır.\n\n5. GARANTİ, SLA VE BAKIM TAAHHÜTLERİ\n- Canlıya alınan yazılım projeleri, teslim tarihinden itibaren sözleşmede belirtilen garanti süresi (standart 6 ay) boyunca üretim hatalarına ve kritik bug'lara karşı garanti kapsamındadır.\n- Kritik kesinti veya arıza bildirimlerinde taahhüt edilen SLA yanıt süresi içinde teknik müdahale başlatılır.\n\n6. GİZLİLİK (NDA) VE SIR SAKLAMA\nTaraflar, keşif toplantılarında veya geliştirme safhasında paylaşılan ticari sırları, iş modellerini, veri tabanı yapılarını ve hassas şirket verilerini 3. şahıslarla paylaşmamayı taahhüt eder.\n\n7. YETKİLİ MAHKEME\nİşbu sözleşmeden doğacak her türlü ihtilafta İstanbul (Çağlayan) Mahkemeleri ve İcra Daireleri yetkilidir.",
+    "kvkkTextContent": "6698 SAYILI KİŞİSEL VERİLERİN KORUNMASI KANUNU (KVKK) AYDINLATMA METNİ\n\n1. VERİ SORUMLUSUNUN KİMLİĞİ\n6698 sayılı Kişisel Verilerin Korunması Kanunu (\"KVKK\") uyarınca, veri sorumlusu sıfatıyla hareket eden Lodonsoft Bilişim Teknolojileri A.Ş. (Büyükdere Cad. No:198 Levent/İstanbul, MERSİS No: 0609088192300001, Vergi No: 6090881923), kişisel verilerinizi mevzuata tam uyumlu olarak işlemektedir.\n\n2. İŞLENEN KİŞİSEL VERİLER\n- Kimlik Verisi: Ad, soyad, unvan.\n- İletişim Verisi: E-posta adresi, cep/iş telefonu, şirket açık adresi.\n- Müşteri İşlem & Proje Verisi: Teklif talepleri, randevu tercihleri, proje takip kodları, hakedişler, fatura bilgileri, yazışmalar ve geri bildirim anket puanları.\n- İşlem Güvenliği Verisi: IP adresleri, log kayıtları, çerez bilgileri, oturum verileri.\n\n3. KİŞİSEL VERİLERİN İŞLENME AMAÇLARI VE HUKUKİ SEBEPLER\nVerileriniz, KVKK Madde 5/2 uyarınca;\n- \"Bir sözleşmenin kurulması veya ifasıyla doğrudan doğruya ilgili olması\" (Yazılım siparişleri, randevular, hakedişler),\n- \"Veri sorumlusunun hukuki yükümlülüğünü yerine getirebilmesi\" (Maliye, Vergi Usul Kanunu, e-Fatura mevzuatı),\n- \"İlgili kişinin temel hak ve özgürlüklerine zarar vermemek kaydıyla meşru menfaatlerimiz için veri işlenmesinin zorunlu olması\" (Müşteri ilişkileri, sistem güvenliği, kalite kontrol)\nhukuki sebeplerine dayalı olarak otomatik veya kısmen otomatik yollarla işlenmektedir.\n\n4. KİŞİSEL VERİLERİN AKTARILMASI\nKişisel verileriniz, kanuni zorunluluklar saklı kalmak kaydıyla üçüncü şahıslara satılmaz ve devredilmez. Yalnızca yasal zorunluluk halinde yetkili kamu kurum ve kuruluşları (Gelir İdaresi Başkanlığı, yargı mercileri) ve altyapı hizmeti sağlanan güvenli sunucu/e-fatura entegratörleri ile paylaşılabilir.\n\n5. VERİ SAKLAMA SÜRESİ\nVerileriniz, yasal mevzuatta öngörülen zamanaşımı süreleri ve şirket politikamız uyarınca belirlenen süre boyunca saklanır; sürenin dolmasıyla güvenli yöntemlerle imha edilir veya anonim hale getirilir.\n\n6. KVKK MADDE 11 KAPSAMINDAKİ HAKLARINIZ\nİlgili kişi olarak; verilerinizin işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, işlenme amacına uygun kullanılıp kullanılmadığını öğrenme, eksik/yanlış verilerin düzeltilmesini isteme, silinmesini veya yok edilmesini talep etme haklarına sahipsiniz. Başvurularınızı destek@lodonsoft.com adresine iletebilirsiniz.",
+    "legalLastUpdated": "10 Ekim 2026",
+    "maintenanceMode": false,
+    "maintenanceMessage": "Sistemlerimizde planlı altyapı güçlendirmesi yapılmaktadır. Kısa süre sonra yayındayız.",
+    "requireTwoFactorAuth": true,
+    "sessionTimeoutMinutes": 30,
+    "allowClientInvoiceDownload": true,
+    "allowClientDirectChat": true,
+    "hideInternalTasksFromClient": false
+  },
+  "chatMessages": [
+    {
+      "id": "msg-1",
+      "projectCode": "LOD-2026-01",
+      "sender": "team",
+      "senderName": "Selin Kaya",
+      "senderRole": "Proje Yöneticisi",
+      "message": "Merhaba! Aura Fintech projenizin 4. sprint geliştirme çalışmaları planlandığı şekilde devam ediyor. 3D Secure ve çok para birimli cüzdan modüllerini test ortamına aldık.",
+      "timestamp": "Dün, 14:15"
+    },
+    {
+      "id": "msg-2",
+      "projectCode": "LOD-2026-01",
+      "sender": "client",
+      "senderName": "Aura Capital Ekibi",
+      "message": "Harika bir haber Selin Hanım! Test bağlantısını inceledik, arayüz akışı ve döviz çevrim hızı son derece başarılı görünüyor.",
+      "timestamp": "Dün, 15:30"
+    },
+    {
+      "id": "msg-3",
+      "projectCode": "LOD-2026-01",
+      "sender": "team",
+      "senderName": "Kaan Demir",
+      "senderRole": "Baş Mimar",
+      "message": "Teşekkürler! Önümüzdeki hafta stres testleri ve güvenlik denetimlerine başlıyoruz. İkinci faz hakediş faturası da sisteminize yansıtıldı.",
+      "timestamp": "Bugün, 09:40"
+    }
+  ]
+}

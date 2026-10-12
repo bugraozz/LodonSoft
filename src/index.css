@@ -1,0 +1,309 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --linear-bg: #050506;
+    --linear-surface: #0a0b0e;
+    --linear-surface-elevated: #111216;
+    --linear-border: rgba(255, 255, 255, 0.08);
+    --linear-border-hover: rgba(255, 255, 255, 0.22);
+    --linear-text: #ffffff;
+    --linear-text-muted: #8a8f98;
+    --linear-text-dim: #5c6068;
+    --linear-accent: #ffffff;
+    --linear-accent-glow: rgba(255, 255, 255, 0.12);
+
+    /* Linear Design System Tokens (design.txt) */
+    --color-void: #08090a;
+    --color-carbon: #0f1011;
+    --color-obsidian: #161718;
+    --color-graphite: #23252a;
+    --color-smoke: #383b3f;
+    --color-ash: #62666d;
+    --color-fog: #8a8f98;
+    --color-mist: #d0d6e0;
+    --color-bone: #e5e5e6;
+    --color-paper: #ffffff;
+    --color-acid-lime: #e4f222;
+    --color-pulse-green: #27a644;
+
+    /* StaggerTestimonials and Shadcn semantic tokens */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 10% 4%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --border: 240 3.7% 18%;
+    --ring: 240 4.9% 83.9%;
+  }
+
+  body {
+    background-color: #050506;
+    color: #ffffff;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.015em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
+
+/* Hyper-Premium Linear Cards: Strict Black & Gray Monochromatic Architecture */
+.linear-card {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.038) 0%, rgba(255, 255, 255, 0.012) 60%, rgba(255, 255, 255, 0.005) 100%), #0a0b0e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 4px 20px -2px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.12),
+    inset 0 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.linear-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 16px 40px -4px rgba(0, 0, 0, 0.9),
+    0 0 24px -2px rgba(255, 255, 255, 0.04),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
+}
+
+/* Elevated Card (for hero visual, modals & focal components) */
+.linear-card-elevated {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.015) 100%), #0e0f13;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 24px 48px -12px rgba(0, 0, 0, 0.95),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
+}
+
+/* Pure Black-to-Gray Radial Backdrop (No Purple/Indigo) */
+.linear-glow-hero {
+  background: 
+    radial-gradient(circle at 50% -12%, rgba(255, 255, 255, 0.09), transparent 55%),
+    radial-gradient(circle at 85% 15%, rgba(175, 180, 190, 0.04), transparent 42%),
+    radial-gradient(circle at 15% 45%, rgba(130, 135, 145, 0.03), transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(25, 27, 32, 0.8), transparent 70%),
+    #050506;
+  position: relative;
+}
+
+.linear-glow-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: -19px -19px;
+  opacity: 0.2;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 65% 55% at 50% 0%, #000 70%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 65% 55% at 50% 0%, #000 70%, transparent 100%);
+}
+
+.linear-grid-bg {
+  position: relative;
+}
+
+.linear-grid-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* Linear Button Stylings: Pure Black, Gray & White */
+.btn-linear-acid {
+  background-color: #e4f222;
+  color: #08090a;
+  font-weight: 510;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  letter-spacing: -0.011em;
+  transition: all 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-linear-acid:hover {
+  background-color: #effc38;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(228, 242, 34, 0.25);
+}
+
+.btn-linear-ghost {
+  background: transparent;
+  border: 1px solid #23252a;
+  color: #d0d6e0;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 400;
+  transition: all 0.14s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-linear-ghost:hover {
+  border-color: #383b3f;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.linear-surface-card {
+  background-color: #0f1011;
+  border: 1px solid #23252a;
+  border-radius: 12px;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.linear-surface-card:hover {
+  border-color: #383b3f;
+  background-color: #121315;
+}
+
+.btn-linear-primary {
+  background-color: #ffffff;
+  color: #050506;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-linear-primary:hover {
+  background-color: #e4e4e7;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.btn-linear-secondary {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-linear-secondary:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.12), 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.btn-linear-accent {
+  background: linear-gradient(180deg, #27272a 0%, #18181b 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-linear-accent:hover {
+  background: linear-gradient(180deg, #3f3f46 0%, #27272a 100%);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Linear Glowing Pill */
+.linear-pill {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #8a8f98;
+  transition: all 0.15s ease;
+}
+
+.linear-pill:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+/* Custom Scrollbar - Pure Black & Gray */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #050506;
+}
+::-webkit-scrollbar-thumb {
+  background: #18191d;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #272930;
+}
+
+/* Print Rules */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+}
+
+/* Stagger Testimonials Semantic Styles */
+.bg-primary {
+  background-color: hsl(var(--primary));
+}
+.text-primary-foreground {
+  color: hsl(var(--primary-foreground));
+}
+.border-primary {
+  border-color: hsl(var(--primary));
+}
+.hover\:border-primary\/50:hover {
+  border-color: hsla(0, 0%, 100%, 0.5);
+}
+.bg-card {
+  background-color: hsl(var(--card));
+}
+.text-card-foreground {
+  color: hsl(var(--card-foreground));
+}
+.border-border {
+  border-color: hsl(var(--border));
+}
+.text-foreground {
+  color: hsl(var(--foreground));
+}
+.text-muted-foreground {
+  color: hsl(var(--muted-foreground));
+}
+.bg-muted {
+  background-color: hsl(var(--muted));
+}
+.bg-muted\/30 {
+  background-color: hsla(240, 3.7%, 15.9%, 0.3);
+}
+.bg-muted\/20 {
+  background-color: hsla(240, 3.7%, 15.9%, 0.2);
+}
+.bg-background {
+  background-color: hsl(var(--background));
+}
+.bg-border {
+  background-color: hsl(var(--border));
+}
+
