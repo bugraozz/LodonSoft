@@ -264,6 +264,8 @@ export interface SystemSettings {
   smsSenderId: string; // Originator (e.g. LODONSOFT)
   smsBalance: number; // e.g. 4850
   smsEnabled: boolean;
+  smsNotifyNewAppointment: boolean;
+  smsNotifyPaymentReceived: boolean;
   smsNotifyPaymentReminder: boolean;
   smsNotifyProjectUpdate: boolean;
   smsNotifyNewQuote: boolean;
@@ -284,10 +286,31 @@ export interface SystemSettings {
   notifyOnNewAppointment: boolean;
   notifyOnNewQuote: boolean;
   notifyOnPaymentReceived: boolean;
+  emailEnabled: boolean;
+  emailNotifyNewAppointment: boolean;
+  emailNotifyNewQuote: boolean;
+  emailNotifyPaymentReceived: boolean;
+  emailNotifyPaymentReminder: boolean;
+  emailNotifyProjectUpdate: boolean;
+  emailNotifyAppointmentReminder: boolean;
+  emailWelcomeSubject: string;
+  emailWelcomeTemplate: string;
   smtpHost: string;
   smtpPort: number;
   smtpUser: string;
   smtpSenderName: string;
+  emailAppointmentSubject: string;
+  emailAppointmentTemplate: string;
+  emailQuoteSubject: string;
+  emailQuoteTemplate: string;
+  emailPaymentSubject: string;
+  emailPaymentTemplate: string;
+  emailPaymentReminderSubject: string;
+  emailPaymentReminderTemplate: string;
+  emailProjectUpdateSubject: string;
+  emailProjectUpdateTemplate: string;
+  emailAppointmentReminderSubject: string;
+  emailAppointmentReminderTemplate: string;
   paymentGatewayMode: 'test' | 'live';
   enforce3dSecure: boolean;
 
@@ -351,4 +374,16 @@ export interface AuditLogItem {
   ipAddress: string;
   status: 'success' | 'warning' | 'info';
   details?: string;
+}
+
+export interface NotificationLogItem {
+  id: string;
+  event: string;
+  channel: 'sms' | 'email' | 'whatsapp';
+  status: 'sent' | 'queued' | 'failed';
+  recipient: string;
+  subject: string;
+  message: string;
+  createdAt: string;
+  metadata?: string;
 }

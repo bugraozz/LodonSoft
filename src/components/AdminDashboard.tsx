@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { AdminStatsSummary } from './AdminStatsSummary';
 import {
@@ -27,6 +27,8 @@ import {
   DollarSign,
   ChevronRight,
   Code2,
+  Bell,
+  MessageSquareText,
 } from 'lucide-react';
 import {
   ProjectTracker,
@@ -36,6 +38,7 @@ import {
   ServiceCategory,
   AppointmentStatus,
   QuoteStatus,
+  SystemSettings,
 } from '../types';
 
 export const AdminDashboard: React.FC = () => {
@@ -75,7 +78,7 @@ export const AdminDashboard: React.FC = () => {
 
   const [activeTab, setActiveTab] = useState<
     'projects' | 'portfolio' | 'services' | 'appointments' | 'quotes' | 'invoices' | 'settings'
-  >('projects');
+  >('appointments');
 
   // Success toast state
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -83,6 +86,8 @@ export const AdminDashboard: React.FC = () => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3000);
   };
+  const [settingsSaveError, setSettingsSaveError] = useState<string | null>(null);
+  const [isSavingSettings, setIsSavingSettings] = useState(false);
 
   // ==========================================
   // TAB 1: PROJECT TRACKER & TIMELINE STATE
@@ -451,22 +456,24 @@ export const AdminDashboard: React.FC = () => {
   // ==========================================
   // TAB 7: SETTINGS STATE
   // ==========================================
-  const [settingsForm, setSettingsForm] = useState({
-    companyName: systemSettings.companyName || 'Lodonsoft Yazılım & Teknoloji A.Ş.',
-    contactEmail: systemSettings.contactEmail || 'iletisim@lodonsoft.com',
-    contactPhone: systemSettings.contactPhone || '+90 (212) 840 20 40',
-    address: systemSettings.address || 'Levent 199, Büyükdere Cad. No:199, Şişli / İstanbul',
-    bankName: systemSettings.bankName || 'Garanti BBVA',
-    bankIban: systemSettings.bankIban || 'TR33 0006 2000 0001 2000 3456 78',
-    slaUptimeGuaranteePercent: systemSettings.slaUptimeGuaranteePercent || 99.9,
-    warrantyDurationMonths: systemSettings.warrantyDurationMonths || 6,
-    ipTransferClauseEnabled: Boolean(systemSettings.ipTransferClauseEnabled),
-  });
+  const [settingsForm, setSettingsForm] = useState<SystemSettings>(() => ({ ...systemSettings }));
 
-  const handleSaveSettings = (e: React.FormEvent) => {
+  useEffect(() => {
+    setSettingsForm({ ...systemSettings });
+  }, [systemSettings]);
+
+  const handleSaveSettings = async (e: React.FormEvent) => {
     e.preventDefault();
-    updateSystemSettings(settingsForm);
-    showToast('Sistem ayarları başarıyla kaydedildi!');
+    setIsSavingSettings(true);
+    setSettingsSaveError(null);
+    try {
+      await updateSystemSettings(settingsForm);
+      showToast('Sistem ayarları başarıyla kaydedildi!');
+    } catch (error) {
+      setSettingsSaveError(error instanceof Error ? error.message : 'Ayarlar kaydedilemedi. Lütfen tekrar deneyin.');
+    } finally {
+      setIsSavingSettings(false);
+    }
   };
 
   return (
@@ -479,7 +486,7 @@ export const AdminDashboard: React.FC = () => {
         </div>
       )}
 
-      <div className="max-w-7xl mx-auto space-y-8">
+      <div className={`${activeTab === 'settings' ? 'w-full' : 'max-w-7xl mx-auto'} space-y-8`}>
         {/* Header Bar */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
           <div>
@@ -491,7 +498,7 @@ export const AdminDashboard: React.FC = () => {
               Yönetim Paneli & Müşteri Takip Sistemi
             </h1>
             <p className="mt-1 text-xs sm:text-sm text-[#8a8f98]">
-              Müşteri projelerini, aşamaları, portföyü, hizmetleri, randevuları ve faturaları tek noktadan yönetin.
+              Portföyü, hizmetleri, randevuları, teklifleri, faturaları ve sistem bildirimlerini yönetin.
             </p>
           </div>
 
@@ -525,21 +532,6 @@ export const AdminDashboard: React.FC = () => {
 
         {/* Navigation Tabs */}
         <div className="flex items-center gap-1.5 p-1.5 bg-[#0c0d12] border border-white/[0.08] rounded-2xl overflow-x-auto max-w-full">
-          <button
-            onClick={() => setActiveTab('projects')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
-              activeTab === 'projects'
-                ? 'bg-white text-black shadow-md'
-                : 'text-[#8a8f98] hover:text-white hover:bg-white/[0.04]'
-            }`}
-          >
-            <GitBranch className="w-3.5 h-3.5" />
-            <span>Müşteri Proje Takip & Timeline</span>
-            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300">
-              {projects.length}
-            </span>
-          </button>
-
           <button
             onClick={() => setActiveTab('portfolio')}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
@@ -1540,112 +1532,697 @@ export const AdminDashboard: React.FC = () => {
         {/* TAB 7: SETTINGS                                          */}
         {/* ======================================================== */}
         {activeTab === 'settings' && (
-          <div className="max-w-3xl linear-card rounded-2xl p-6 sm:p-8 space-y-6">
-            <div className="pb-4 border-b border-white/[0.08]">
-              <h2 className="text-xl font-bold text-white">Sistem & Kurumsal Parametreler</h2>
-              <p className="text-xs text-[#8a8f98] mt-1">
-                Şirket iletişim, banka IBAN bilgileri ve SLA garanti taahhütleri.
-              </p>
+          <div className="w-full space-y-6">
+            <div className="w-full space-y-6">
+              <div className="linear-card rounded-3xl p-5 sm:p-7 shadow-[0_16px_48px_rgba(0,0,0,0.3)] border border-white/[0.08]">
+                <div className="pb-5 border-b border-white/[0.08]">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-300">
+                    <Settings className="w-3 h-3" />
+                    System settings
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-white mt-3">Sistem Ayarları & Bildirim Yönetimi</h2>
+                  <p className="text-xs text-[#8a8f98] mt-2 max-w-4xl">
+                    SMS ve e-posta kanallarını ayrı ayrı etkinleştirin; sağlayıcı, gönderim olayları, zamanlama ve müşteri mesajlarını tek ekrandan yönetin.
+                  </p>
+                </div>
+
+                <form onSubmit={handleSaveSettings} className="space-y-6 pt-6">
+                  <div className="rounded-2xl border border-white/[0.08] bg-[#0a0b0e] p-4 sm:p-5">
+                    <div className="flex items-center gap-2 mb-4">
+                      <Settings className="w-4 h-4 text-emerald-400" />
+                      <h3 className="text-sm font-semibold text-white">Şirket & İletişim</h3>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Şirket Ünvanı</label>
+                        <input
+                          type="text"
+                          value={settingsForm.companyName}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, companyName: e.target.value })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-xs text-zinc-300 block mb-1.5 font-medium">İletişim E-Posta</label>
+                        <input
+                          type="email"
+                          value={settingsForm.contactEmail}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, contactEmail: e.target.value })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Telefon</label>
+                        <input
+                          type="text"
+                          value={settingsForm.contactPhone}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, contactPhone: e.target.value })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Banka Adı</label>
+                        <input
+                          type="text"
+                          value={settingsForm.bankName}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, bankName: e.target.value })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="mt-4">
+                      <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Kurumsal IBAN</label>
+                      <input
+                        type="text"
+                        value={settingsForm.bankIban}
+                        onChange={(e) => setSettingsForm({ ...settingsForm, bankIban: e.target.value })}
+                        className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white font-mono focus:outline-hidden"
+                      />
+                    </div>
+
+                    <div className="mt-4">
+                      <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Merkez Adres</label>
+                      <input
+                        type="text"
+                        value={settingsForm.address}
+                        onChange={(e) => setSettingsForm({ ...settingsForm, address: e.target.value })}
+                        className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-white/[0.08] bg-[#0a0b0e] p-4 sm:p-5">
+                    <div className="flex items-center gap-2 mb-4">
+                      <Sparkles className="w-4 h-4 text-violet-400" />
+                      <h3 className="text-sm font-semibold text-white">Gönderim Kanalları & Sağlayıcı Bağlantıları</h3>
+                    </div>
+                    <div className="grid grid-cols-1 2xl:grid-cols-2 gap-5">
+                      <section className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-4 sm:p-5 space-y-4">
+                        <div className="flex items-start justify-between gap-4">
+                          <div>
+                            <h4 className="text-sm font-semibold text-white">SMS sağlayıcısı</h4>
+                            <p className="text-[11px] text-[#8a8f98] mt-1">SMS bildirimlerini açın ve sağlayıcı hesabınızı tanımlayın.</p>
+                          </div>
+                          <label className="flex items-center gap-2 text-xs font-medium text-zinc-200 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={settingsForm.smsEnabled}
+                              onChange={(e) => setSettingsForm({ ...settingsForm, smsEnabled: e.target.checked })}
+                              className="rounded accent-emerald-400 w-4 h-4 cursor-pointer"
+                            />
+                            {settingsForm.smsEnabled ? 'Aktif' : 'Kapalı'}
+                          </label>
+                        </div>
+                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+                          <div>
+                            <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Sağlayıcı</label>
+                            <select
+                              value={settingsForm.smsProvider}
+                              onChange={(e) =>
+                                setSettingsForm({
+                                  ...settingsForm,
+                                  smsProvider: e.target.value as SystemSettings['smsProvider'],
+                                })
+                              }
+                              className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden cursor-pointer"
+                            >
+                              <option value="netgsm">Netgsm</option>
+                              <option value="iletimerkezi">İleti Merkezi</option>
+                              <option value="twilio">Twilio</option>
+                              <option value="mutlucell">Mutlucell</option>
+                              <option value="verimor">Verimor</option>
+                            </select>
+                          </div>
+                          <div>
+                            <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Gönderici adı (başlık)</label>
+                            <input
+                              type="text"
+                              required={settingsForm.smsEnabled}
+                              value={settingsForm.smsSenderId}
+                              onChange={(e) => setSettingsForm({ ...settingsForm, smsSenderId: e.target.value })}
+                              className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                            />
+                          </div>
+                          <div>
+                            <label className="text-xs text-zinc-300 block mb-1.5 font-medium">API kullanıcı adı</label>
+                            <input
+                              type="text"
+                              required={settingsForm.smsEnabled}
+                              value={settingsForm.smsApiUser}
+                              onChange={(e) => setSettingsForm({ ...settingsForm, smsApiUser: e.target.value })}
+                              className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                            />
+                          </div>
+                          <div>
+                            <label className="text-xs text-zinc-300 block mb-1.5 font-medium">API anahtarı</label>
+                            <input
+                              type="password"
+                              required={settingsForm.smsEnabled}
+                              value={settingsForm.smsApiKey}
+                              onChange={(e) => setSettingsForm({ ...settingsForm, smsApiKey: e.target.value })}
+                              autoComplete="new-password"
+                              className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                            />
+                          </div>
+                        </div>
+                      </section>
+
+                      <section className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-4 sm:p-5 space-y-4">
+                        <div className="flex items-start justify-between gap-4">
+                          <div>
+                            <h4 className="text-sm font-semibold text-white">E-posta (SMTP)</h4>
+                            <p className="text-[11px] text-[#8a8f98] mt-1">SMTP bağlantısını yapılandırın ve müşteri e-postalarını etkinleştirin.</p>
+                          </div>
+                          <label className="flex items-center gap-2 text-xs font-medium text-zinc-200 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={settingsForm.emailEnabled}
+                              onChange={(e) => setSettingsForm({ ...settingsForm, emailEnabled: e.target.checked })}
+                              className="rounded accent-emerald-400 w-4 h-4 cursor-pointer"
+                            />
+                            {settingsForm.emailEnabled ? 'Aktif' : 'Kapalı'}
+                          </label>
+                        </div>
+                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+                          <div>
+                            <label className="text-xs text-zinc-300 block mb-1.5 font-medium">SMTP sunucu</label>
+                            <input
+                              type="text"
+                              required={settingsForm.emailEnabled}
+                              value={settingsForm.smtpHost}
+                              onChange={(e) => setSettingsForm({ ...settingsForm, smtpHost: e.target.value })}
+                              placeholder="smtp.ornek.com"
+                              className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                            />
+                          </div>
+                          <div>
+                            <label className="text-xs text-zinc-300 block mb-1.5 font-medium">SMTP portu</label>
+                            <input
+                              type="number"
+                              min="1"
+                              max="65535"
+                              value={settingsForm.smtpPort}
+                              onChange={(e) => setSettingsForm({ ...settingsForm, smtpPort: Number(e.target.value) })}
+                              className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white font-mono focus:outline-hidden"
+                            />
+                          </div>
+                          <div>
+                            <label className="text-xs text-zinc-300 block mb-1.5 font-medium">SMTP kullanıcı / gönderici e-posta</label>
+                            <input
+                              type="email"
+                              required={settingsForm.emailEnabled}
+                              value={settingsForm.smtpUser}
+                              onChange={(e) => setSettingsForm({ ...settingsForm, smtpUser: e.target.value })}
+                              placeholder="bildirim@ornek.com"
+                              className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                            />
+                          </div>
+                          <div>
+                            <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Gönderici görünen adı</label>
+                            <input
+                              type="text"
+                              required={settingsForm.emailEnabled}
+                              value={settingsForm.smtpSenderName}
+                              onChange={(e) => setSettingsForm({ ...settingsForm, smtpSenderName: e.target.value })}
+                              placeholder="Şirket adı"
+                              className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                            />
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-white/[0.08] bg-[#0a0b0e] p-4 sm:p-5">
+                    <div className="flex items-center gap-2 mb-1">
+                      <Bell className="w-4 h-4 text-amber-400" />
+                      <h3 className="text-sm font-semibold text-white">Bildirim Tetikleyicileri</h3>
+                    </div>
+
+                    <div className="grid grid-cols-1 xl:grid-cols-2 gap-3 mt-4">
+                      <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-3">
+                        <div className="text-xs font-semibold text-white">Yeni randevu talebi</div>
+                        <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+                          <label className="flex items-center gap-2 text-[11px] text-zinc-300 cursor-pointer">
+                            <input type="checkbox" checked={settingsForm.smsNotifyNewAppointment} onChange={(e) => setSettingsForm({ ...settingsForm, smsNotifyNewAppointment: e.target.checked })} disabled={!settingsForm.smsEnabled} className="accent-emerald-400" />
+                            SMS gönder
+                          </label>
+                          <label className="flex items-center gap-2 text-[11px] text-zinc-300 cursor-pointer">
+                            <input type="checkbox" checked={settingsForm.emailNotifyNewAppointment} onChange={(e) => setSettingsForm({ ...settingsForm, emailNotifyNewAppointment: e.target.checked })} disabled={!settingsForm.emailEnabled} className="accent-emerald-400" />
+                            E-posta gönder
+                          </label>
+                        </div>
+                      </div>
+
+                      <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-3">
+                        <div className="text-xs font-semibold text-white">Teklif oluşturuldu / onaylandı</div>
+                        <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+                          <label className="flex items-center gap-2 text-[11px] text-zinc-300 cursor-pointer">
+                            <input type="checkbox" checked={settingsForm.smsNotifyNewQuote} onChange={(e) => setSettingsForm({ ...settingsForm, smsNotifyNewQuote: e.target.checked })} disabled={!settingsForm.smsEnabled} className="accent-emerald-400" />
+                            SMS gönder
+                          </label>
+                          <label className="flex items-center gap-2 text-[11px] text-zinc-300 cursor-pointer">
+                            <input type="checkbox" checked={settingsForm.emailNotifyNewQuote} onChange={(e) => setSettingsForm({ ...settingsForm, emailNotifyNewQuote: e.target.checked })} disabled={!settingsForm.emailEnabled} className="accent-emerald-400" />
+                            E-posta gönder
+                          </label>
+                        </div>
+                      </div>
+
+                      <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-3">
+                        <div className="text-xs font-semibold text-white">Ödeme alındı</div>
+                        <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+                          <label className="flex items-center gap-2 text-[11px] text-zinc-300 cursor-pointer">
+                            <input type="checkbox" checked={settingsForm.smsNotifyPaymentReceived} onChange={(e) => setSettingsForm({ ...settingsForm, smsNotifyPaymentReceived: e.target.checked })} disabled={!settingsForm.smsEnabled} className="accent-emerald-400" />
+                            SMS gönder
+                          </label>
+                          <label className="flex items-center gap-2 text-[11px] text-zinc-300 cursor-pointer">
+                            <input type="checkbox" checked={settingsForm.emailNotifyPaymentReceived} onChange={(e) => setSettingsForm({ ...settingsForm, emailNotifyPaymentReceived: e.target.checked })} disabled={!settingsForm.emailEnabled} className="accent-emerald-400" />
+                            E-posta gönder
+                          </label>
+                        </div>
+                      </div>
+
+                      <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-3">
+                        <div className="text-xs font-semibold text-white">Ödeme vade hatırlatması</div>
+                        <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+                          <label className="flex items-center gap-2 text-[11px] text-zinc-300 cursor-pointer">
+                            <input type="checkbox" checked={settingsForm.smsNotifyPaymentReminder} onChange={(e) => setSettingsForm({ ...settingsForm, smsNotifyPaymentReminder: e.target.checked })} disabled={!settingsForm.smsEnabled} className="accent-emerald-400" />
+                            SMS gönder
+                          </label>
+                          <label className="flex items-center gap-2 text-[11px] text-zinc-300 cursor-pointer">
+                            <input type="checkbox" checked={settingsForm.emailNotifyPaymentReminder} onChange={(e) => setSettingsForm({ ...settingsForm, emailNotifyPaymentReminder: e.target.checked })} disabled={!settingsForm.emailEnabled} className="accent-emerald-400" />
+                            E-posta gönder
+                          </label>
+                        </div>
+                      </div>
+
+                      <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-3">
+                        <div className="text-xs font-semibold text-white">Proje durumu güncellendi</div>
+                        <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+                          <label className="flex items-center gap-2 text-[11px] text-zinc-300 cursor-pointer">
+                            <input type="checkbox" checked={settingsForm.smsNotifyProjectUpdate} onChange={(e) => setSettingsForm({ ...settingsForm, smsNotifyProjectUpdate: e.target.checked })} disabled={!settingsForm.smsEnabled} className="accent-emerald-400" />
+                            SMS gönder
+                          </label>
+                          <label className="flex items-center gap-2 text-[11px] text-zinc-300 cursor-pointer">
+                            <input type="checkbox" checked={settingsForm.emailNotifyProjectUpdate} onChange={(e) => setSettingsForm({ ...settingsForm, emailNotifyProjectUpdate: e.target.checked })} disabled={!settingsForm.emailEnabled} className="accent-emerald-400" />
+                            E-posta gönder
+                          </label>
+                        </div>
+                      </div>
+
+                      <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-3">
+                        <div className="text-xs font-semibold text-white">Randevu hatırlatması</div>
+                        <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+                          <label className="flex items-center gap-2 text-[11px] text-zinc-300 cursor-pointer">
+                            <input type="checkbox" checked={settingsForm.smsNotifyAppointmentReminder} onChange={(e) => setSettingsForm({ ...settingsForm, smsNotifyAppointmentReminder: e.target.checked })} disabled={!settingsForm.smsEnabled} className="accent-emerald-400" />
+                            SMS gönder
+                          </label>
+                          <label className="flex items-center gap-2 text-[11px] text-zinc-300 cursor-pointer">
+                            <input type="checkbox" checked={settingsForm.emailNotifyAppointmentReminder} onChange={(e) => setSettingsForm({ ...settingsForm, emailNotifyAppointmentReminder: e.target.checked })} disabled={!settingsForm.emailEnabled} className="accent-emerald-400" />
+                            E-posta gönder
+                          </label>
+                        </div>
+                      </div>
+
+                      <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-3">
+                        <div className="text-xs font-semibold text-white">Yeni müşteriye hoş geldin e-postası</div>
+                        <div className="mt-3">
+                          <label className="flex items-center gap-2 text-[11px] text-zinc-300 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={settingsForm.autoSendWelcomeEmail}
+                              onChange={(e) => setSettingsForm({ ...settingsForm, autoSendWelcomeEmail: e.target.checked })}
+                              disabled={!settingsForm.emailEnabled}
+                              className="accent-emerald-400"
+                            />
+                            E-posta gönder
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-4 border-t border-white/[0.08] pt-4">
+                      <p className="text-[11px] font-semibold uppercase tracking-wide text-[#8a8f98] mb-3">Yönetici bildirimleri</p>
+                      <div className="flex flex-wrap gap-x-6 gap-y-3">
+                        <label className="flex items-center gap-2 text-[11px] text-zinc-300 cursor-pointer">
+                          <input type="checkbox" checked={settingsForm.notifyOnNewAppointment} onChange={(e) => setSettingsForm({ ...settingsForm, notifyOnNewAppointment: e.target.checked })} className="accent-emerald-400" />
+                          Yeni randevu
+                        </label>
+                        <label className="flex items-center gap-2 text-[11px] text-zinc-300 cursor-pointer">
+                          <input type="checkbox" checked={settingsForm.notifyOnNewQuote} onChange={(e) => setSettingsForm({ ...settingsForm, notifyOnNewQuote: e.target.checked })} className="accent-emerald-400" />
+                          Yeni teklif
+                        </label>
+                        <label className="flex items-center gap-2 text-[11px] text-zinc-300 cursor-pointer">
+                          <input type="checkbox" checked={settingsForm.notifyOnPaymentReceived} onChange={(e) => setSettingsForm({ ...settingsForm, notifyOnPaymentReceived: e.target.checked })} className="accent-emerald-400" />
+                          Ödeme alındı
+                        </label>
+                      </div>
+                    </div>
+                    <label className="mt-3 flex items-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.02] p-3 text-xs text-zinc-300 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={settingsForm.whatsappAutoResponder}
+                        onChange={(e) => setSettingsForm({ ...settingsForm, whatsappAutoResponder: e.target.checked })}
+                        className="accent-emerald-400"
+                      />
+                      WhatsApp otomatik cevaplamayı etkinleştir
+                    </label>
+                  </div>
+
+                  <div className="rounded-2xl border border-white/[0.08] bg-[#0a0b0e] p-4 sm:p-5">
+                    <div className="flex items-center gap-2 mb-1">
+                      <Clock className="w-4 h-4 text-sky-400" />
+                      <h3 className="text-sm font-semibold text-white">Hatırlatma & Zamanlama</h3>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-4">
+                      <div>
+                        <label className="text-xs text-zinc-300 block mb-1.5 font-medium">SMS randevu hatırlatma (saat)</label>
+                        <input
+                          type="number"
+                          min="0"
+                          value={settingsForm.smsAppointmentReminderHours}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, smsAppointmentReminderHours: Number(e.target.value) })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white font-mono focus:outline-hidden"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-xs text-zinc-300 block mb-1.5 font-medium">E-posta randevu hatırlatma (saat)</label>
+                        <input
+                          type="number"
+                          min="0"
+                          value={settingsForm.appointmentReminderHours}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, appointmentReminderHours: Number(e.target.value) })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white font-mono focus:outline-hidden"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Teklif Takip (Gün)</label>
+                        <input
+                          type="number"
+                          min="0"
+                          value={settingsForm.quoteFollowUpDays}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, quoteFollowUpDays: Number(e.target.value) })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white font-mono focus:outline-hidden"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Ödeme vade uyarısı (gün)</label>
+                        <input
+                          type="number"
+                          min="0"
+                          value={settingsForm.invoiceOverdueWarningDays}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, invoiceOverdueWarningDays: Number(e.target.value) })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white font-mono focus:outline-hidden"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-white/[0.08] bg-[#0a0b0e] p-4 sm:p-5">
+                    <div className="flex items-center gap-2 mb-1">
+                      <MessageSquareText className="w-4 h-4 text-cyan-400" />
+                      <h3 className="text-sm font-semibold text-white">SMS & WhatsApp Mesaj Şablonları</h3>
+                    </div>
+                    <p className="text-[11px] text-[#8a8f98] mt-2">Şablon alanları müşteri/proje bilgileriyle kullanılmak üzere saklanır. Değişken örnekleri: {'{musteri_adi}'}, {'{proje_adi}'}, {'{tarih}'}, {'{saat}'}, {'{tutar}'}.</p>
+                    <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-4">
+                      <div>
+                        <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Ödeme vade hatırlatma SMS</label>
+                        <textarea
+                          rows={3}
+                          value={settingsForm.smsPaymentTemplate}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, smsPaymentTemplate: e.target.value })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Proje durumu güncelleme SMS</label>
+                        <textarea
+                          rows={3}
+                          value={settingsForm.smsProjectUpdateTemplate}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, smsProjectUpdateTemplate: e.target.value })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Teklif SMS</label>
+                        <textarea
+                          rows={3}
+                          value={settingsForm.smsQuoteTemplate}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, smsQuoteTemplate: e.target.value })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Randevu SMS</label>
+                        <textarea
+                          rows={3}
+                          value={settingsForm.smsAppointmentTemplate}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, smsAppointmentTemplate: e.target.value })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-xs text-zinc-300 block mb-1.5 font-medium">WhatsApp Otomatik Cevap Metni</label>
+                        <textarea
+                          rows={3}
+                          value={settingsForm.whatsappTemplateTr}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, whatsappTemplateTr: e.target.value })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-white/[0.08] bg-[#0a0b0e] p-4 sm:p-5">
+                    <div className="flex items-center gap-2 mb-1">
+                      <MessageSquareText className="w-4 h-4 text-sky-400" />
+                      <h3 className="text-sm font-semibold text-white">E-posta konu ve içerik şablonları</h3>
+                    </div>
+                    <p className="text-[11px] text-[#8a8f98] mt-2">Her bildirim olayı için konu ve e-posta içeriğini ayrı düzenleyin. E-posta değişkenleri SMS değişkenleriyle aynı biçimdedir.</p>
+                    <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4 mt-4">
+                      <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-4 space-y-3">
+                        <h4 className="text-xs font-semibold text-white">Hoş geldin e-postası</h4>
+                        <input
+                          type="text"
+                          aria-label="Hoş geldin e-posta konusu"
+                          value={settingsForm.emailWelcomeSubject}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, emailWelcomeSubject: e.target.value })}
+                          placeholder="E-posta konusu"
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                        <textarea
+                          rows={4}
+                          aria-label="Hoş geldin e-posta içeriği"
+                          value={settingsForm.emailWelcomeTemplate}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, emailWelcomeTemplate: e.target.value })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                      </div>
+                      <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-4 space-y-3">
+                        <h4 className="text-xs font-semibold text-white">Randevu talebi</h4>
+                        <input
+                          type="text"
+                          aria-label="Randevu e-posta konusu"
+                          value={settingsForm.emailAppointmentSubject}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, emailAppointmentSubject: e.target.value })}
+                          placeholder="E-posta konusu"
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                        <textarea
+                          rows={4}
+                          aria-label="Randevu e-posta içeriği"
+                          value={settingsForm.emailAppointmentTemplate}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, emailAppointmentTemplate: e.target.value })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                      </div>
+                      <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-4 space-y-3">
+                        <h4 className="text-xs font-semibold text-white">Teklif bildirimi</h4>
+                        <input
+                          type="text"
+                          aria-label="Teklif e-posta konusu"
+                          value={settingsForm.emailQuoteSubject}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, emailQuoteSubject: e.target.value })}
+                          placeholder="E-posta konusu"
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                        <textarea
+                          rows={4}
+                          aria-label="Teklif e-posta içeriği"
+                          value={settingsForm.emailQuoteTemplate}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, emailQuoteTemplate: e.target.value })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                      </div>
+                      <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-4 space-y-3">
+                        <h4 className="text-xs font-semibold text-white">Ödeme alındı</h4>
+                        <input
+                          type="text"
+                          aria-label="Ödeme alındı e-posta konusu"
+                          value={settingsForm.emailPaymentSubject}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, emailPaymentSubject: e.target.value })}
+                          placeholder="E-posta konusu"
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                        <textarea
+                          rows={4}
+                          aria-label="Ödeme alındı e-posta içeriği"
+                          value={settingsForm.emailPaymentTemplate}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, emailPaymentTemplate: e.target.value })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                      </div>
+                      <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-4 space-y-3">
+                        <h4 className="text-xs font-semibold text-white">Ödeme vade hatırlatması</h4>
+                        <input
+                          type="text"
+                          aria-label="Ödeme hatırlatma e-posta konusu"
+                          value={settingsForm.emailPaymentReminderSubject}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, emailPaymentReminderSubject: e.target.value })}
+                          placeholder="E-posta konusu"
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                        <textarea
+                          rows={4}
+                          aria-label="Ödeme hatırlatma e-posta içeriği"
+                          value={settingsForm.emailPaymentReminderTemplate}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, emailPaymentReminderTemplate: e.target.value })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                      </div>
+                      <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-4 space-y-3">
+                        <h4 className="text-xs font-semibold text-white">Proje durumu güncellemesi</h4>
+                        <input
+                          type="text"
+                          aria-label="Proje güncelleme e-posta konusu"
+                          value={settingsForm.emailProjectUpdateSubject}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, emailProjectUpdateSubject: e.target.value })}
+                          placeholder="E-posta konusu"
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                        <textarea
+                          rows={4}
+                          aria-label="Proje güncelleme e-posta içeriği"
+                          value={settingsForm.emailProjectUpdateTemplate}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, emailProjectUpdateTemplate: e.target.value })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                      </div>
+                      <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-4 space-y-3">
+                        <h4 className="text-xs font-semibold text-white">Randevu hatırlatması</h4>
+                        <input
+                          type="text"
+                          aria-label="Randevu hatırlatma e-posta konusu"
+                          value={settingsForm.emailAppointmentReminderSubject}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, emailAppointmentReminderSubject: e.target.value })}
+                          placeholder="E-posta konusu"
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                        <textarea
+                          rows={4}
+                          aria-label="Randevu hatırlatma e-posta içeriği"
+                          value={settingsForm.emailAppointmentReminderTemplate}
+                          onChange={(e) => setSettingsForm({ ...settingsForm, emailAppointmentReminderTemplate: e.target.value })}
+                          className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-end pt-2">
+                    {settingsSaveError && (
+                      <p role="alert" className="mr-auto text-xs text-red-300">
+                        {settingsSaveError}
+                      </p>
+                    )}
+                    <button
+                      type="submit"
+                      disabled={isSavingSettings}
+                      className="btn-linear-primary px-5 py-3 text-xs sm:text-sm font-semibold rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-lg disabled:opacity-60 disabled:cursor-wait"
+                    >
+                      <Save className="w-4 h-4 text-black" />
+                      <span>{isSavingSettings ? 'Kaydediliyor...' : 'Ayarları Kaydet'}</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <aside className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="linear-card rounded-3xl p-5 border border-white/[0.08] bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.18),transparent_35%),rgba(16,17,22,0.92)]">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Bell className="w-4 h-4 text-sky-400" />
+                    <h3 className="text-sm font-semibold text-white">Ayar Özeti</h3>
+                  </div>
+                  <div className="space-y-3 text-xs text-[#c8ccd1]">
+                    <div className="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-2">
+                      <span>SMS Durumu</span>
+                      <span className={`font-semibold ${settingsForm.smsEnabled ? 'text-emerald-300' : 'text-amber-300'}`}>
+                        {settingsForm.smsEnabled ? 'Aktif' : 'Kapalı'}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-2">
+                      <span>E-Posta</span>
+                      <span className={`font-semibold ${settingsForm.emailEnabled ? 'text-emerald-300' : 'text-amber-300'}`}>
+                        {settingsForm.emailEnabled ? 'Aktif' : 'Kapalı'}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-2">
+                      <span>SMTP bağlantısı</span>
+                      <span className={`font-semibold ${settingsForm.smtpHost && settingsForm.smtpUser ? 'text-emerald-300' : 'text-amber-300'}`}>
+                        {settingsForm.smtpHost && settingsForm.smtpUser ? 'Bilgiler girildi' : 'Bilgiler eksik'}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-2">
+                      <span>WhatsApp</span>
+                      <span className={`font-semibold ${settingsForm.whatsappAutoResponder ? 'text-emerald-300' : 'text-amber-300'}`}>
+                        {settingsForm.whatsappAutoResponder ? 'Açık' : 'Kapalı'}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-2">
+                      <span>Aktif müşteri olayı</span>
+                      <span className="font-semibold text-white">
+                        {[
+                          (settingsForm.smsEnabled && settingsForm.smsNotifyNewAppointment) ||
+                            (settingsForm.emailEnabled && settingsForm.emailNotifyNewAppointment),
+                          (settingsForm.smsEnabled && settingsForm.smsNotifyNewQuote) ||
+                            (settingsForm.emailEnabled && settingsForm.emailNotifyNewQuote),
+                          (settingsForm.smsEnabled && settingsForm.smsNotifyPaymentReceived) ||
+                            (settingsForm.emailEnabled && settingsForm.emailNotifyPaymentReceived),
+                          (settingsForm.smsEnabled && settingsForm.smsNotifyPaymentReminder) ||
+                            (settingsForm.emailEnabled && settingsForm.emailNotifyPaymentReminder),
+                          (settingsForm.smsEnabled && settingsForm.smsNotifyProjectUpdate) ||
+                            (settingsForm.emailEnabled && settingsForm.emailNotifyProjectUpdate),
+                          (settingsForm.smsEnabled && settingsForm.smsNotifyAppointmentReminder) ||
+                            (settingsForm.emailEnabled && settingsForm.emailNotifyAppointmentReminder),
+                          settingsForm.emailEnabled && settingsForm.autoSendWelcomeEmail,
+                        ].filter(Boolean).length} / 7
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="linear-card rounded-3xl p-5 border border-white/[0.08] bg-[radial-gradient(circle_at_top,_rgba(16,185,129,0.15),transparent_35%),rgba(16,17,22,0.92)]">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Shield className="w-4 h-4 text-emerald-400" />
+                    <h3 className="text-sm font-semibold text-white">Kurulum bilgisi</h3>
+                  </div>
+
+                  <p className="text-xs leading-5 text-[#c8ccd1]">
+                    Bu ekrandaki sağlayıcı ayarları, olay seçimleri ve şablonlar kaydedilir. Gerçek SMS/e-posta gönderimi için sunucu tarafında sağlayıcı bağlantısının ayrıca kurulması gerekir; formu kaydetmek tek başına mesaj göndermez.
+                  </p>
+                </div>
+              </aside>
             </div>
-
-            <form onSubmit={handleSaveSettings} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Şirket Ünvanı</label>
-                  <input
-                    type="text"
-                    value={settingsForm.companyName}
-                    onChange={(e) => setSettingsForm({ ...settingsForm, companyName: e.target.value })}
-                    className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs text-zinc-300 block mb-1.5 font-medium">İletişim E-Posta</label>
-                  <input
-                    type="email"
-                    value={settingsForm.contactEmail}
-                    onChange={(e) => setSettingsForm({ ...settingsForm, contactEmail: e.target.value })}
-                    className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Telefon</label>
-                  <input
-                    type="text"
-                    value={settingsForm.contactPhone}
-                    onChange={(e) => setSettingsForm({ ...settingsForm, contactPhone: e.target.value })}
-                    className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Banka Adı</label>
-                  <input
-                    type="text"
-                    value={settingsForm.bankName}
-                    onChange={(e) => setSettingsForm({ ...settingsForm, bankName: e.target.value })}
-                    className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Kurumsal IBAN</label>
-                <input
-                  type="text"
-                  value={settingsForm.bankIban}
-                  onChange={(e) => setSettingsForm({ ...settingsForm, bankIban: e.target.value })}
-                  className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white font-mono focus:outline-hidden"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Merkez Adres</label>
-                <input
-                  type="text"
-                  value={settingsForm.address}
-                  onChange={(e) => setSettingsForm({ ...settingsForm, address: e.target.value })}
-                  className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white focus:outline-hidden"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div>
-                  <label className="text-xs text-zinc-300 block mb-1.5 font-medium">SLA Uptime Taahhüdü (%)</label>
-                  <input
-                    type="number"
-                    step="0.1"
-                    value={settingsForm.slaUptimeGuaranteePercent}
-                    onChange={(e) =>
-                      setSettingsForm({ ...settingsForm, slaUptimeGuaranteePercent: Number(e.target.value) })
-                    }
-                    className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white font-mono focus:outline-hidden"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs text-zinc-300 block mb-1.5 font-medium">Garanti Desteği (Ay)</label>
-                  <input
-                    type="number"
-                    value={settingsForm.warrantyDurationMonths}
-                    onChange={(e) =>
-                      setSettingsForm({ ...settingsForm, warrantyDurationMonths: Number(e.target.value) })
-                    }
-                    className="w-full bg-[#050506] border border-white/[0.1] rounded-xl p-3 text-xs text-white font-mono focus:outline-hidden"
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                className="btn-linear-primary w-full py-3 text-xs sm:text-sm font-semibold rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-lg mt-4"
-              >
-                <Save className="w-4 h-4 text-black" />
-                <span>Ayarları Kaydet</span>
-              </button>
-            </form>
           </div>
         )}
       </div>

@@ -145,12 +145,12 @@ export const translations = {
 
     // Project Tracker
     tracker: {
-      sectionTitle: 'Canlı Proje Takip Sistemi',
+      sectionTitle: 'Müşteri Proje Destek Merkezi',
       sectionSubtitle:
-        'Lodonsoft müşterileri, projelerinin hangi aşamada olduğunu, tamamlanan sprintleri ve sonraki teslimatları anlık izleyebilir.',
-      inputPlaceholder: 'Proje veya Takip Kodunuzu Girin (Örn: LOD-2026-01)',
+        'Teknik ekiple mesajlaşın, projenize ait faturaları görüntüleyin ve hakediş/faz ödemelerinizi güvenle yönetin.',
+      inputPlaceholder: 'Proje kodunuzu girin (Örn: LOD-2026-01)',
       searchBtn: 'Projeyi Sorgula',
-      demoCodesHint: 'Hızlı Demo Kodları:',
+      demoCodesHint: 'Örnek proje kodları:',
       overallProgress: 'Genel Tamamlanma Oranı',
       projectManager: 'Baş Mimar / Proje Yöneticisi:',
       budgetPaid: 'Ödenen / Toplam Bütçe:',
@@ -223,9 +223,9 @@ export const translations = {
       statusActive: 'Çevrimiçi',
       inputPlaceholder: 'Mesajınızı yazın...',
       send: 'Gönder',
-      quickQuery1: 'Son sprint güncellemesi nedir?',
-      quickQuery2: 'Test ortamı bağlantısını iletebilir misiniz?',
-      quickQuery3: 'Bir sonraki faza ne zaman geçiyoruz?',
+      quickQuery1: 'Projemle ilgili son gelişme nedir?',
+      quickQuery2: 'Teknik ekibe bir sorum var.',
+      quickQuery3: 'Faturam hakkında bilgi alabilir miyim?',
       typing: 'Ekip yanıt hazırlıyor...',
     },
 
@@ -435,12 +435,12 @@ export const translations = {
 
     // Project Tracker
     tracker: {
-      sectionTitle: 'Live Project Tracking System',
+      sectionTitle: 'Client Project Support Center',
       sectionSubtitle:
-        'Lodonsoft clients can monitor project milestones, active sprints, test builds, and upcoming deliverables in real-time.',
-      inputPlaceholder: 'Enter Project or Reference Code (e.g. LOD-2026-01)',
+        'Message the technical team, view project invoices, and manage milestone payments securely.',
+      inputPlaceholder: 'Enter your project code (e.g. LOD-2026-01)',
       searchBtn: 'Inspect Project',
-      demoCodesHint: 'Quick Sample Codes:',
+      demoCodesHint: 'Example project codes:',
       overallProgress: 'Overall Completion',
       projectManager: 'Lead Architect / Manager:',
       budgetPaid: 'Paid / Total Budget:',
@@ -513,9 +513,9 @@ export const translations = {
       statusActive: 'Online',
       inputPlaceholder: 'Type a message to the team...',
       send: 'Send',
-      quickQuery1: 'What is the latest sprint status?',
-      quickQuery2: 'Can you share the staging environment link?',
-      quickQuery3: 'When is the next milestone delivery expected?',
+      quickQuery1: 'What is the latest update on my project?',
+      quickQuery2: 'I have a question for the technical team.',
+      quickQuery3: 'Can I get information about my invoice?',
       typing: 'Team is drafting a response...',
     },
 

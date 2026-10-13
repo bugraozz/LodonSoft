@@ -10,6 +10,7 @@ import {
   TestimonialItem,
   SystemSettings,
   AuditLogItem,
+  NotificationLogItem,
 } from '../types';
 
 export const HERO_IMAGE = '/src/assets/images/hero_software_workspace_1791573639901.jpg';
@@ -591,7 +592,7 @@ export const INITIAL_CHAT_MESSAGES: ChatMessage[] = [
     sender: 'team',
     senderName: 'Selin Kaya',
     senderRole: 'Proje Yöneticisi',
-    message: 'Merhaba! Aura Fintech projenizin 4. sprint geliştirme çalışmaları planlandığı şekilde devam ediyor. 3D Secure ve çok para birimli cüzdan modüllerini test ortamına aldık.',
+    message: 'Merhaba! Aura Fintech projenizin 3D Secure ve çok para birimli cüzdan modülleriyle ilgili teknik desteğe hazırız. Sorularınız için bize yazabilirsiniz.',
     timestamp: 'Dün, 14:15',
   },
   {
@@ -1036,6 +1037,8 @@ export const INITIAL_SYSTEM_SETTINGS: SystemSettings = {
   smsSenderId: 'LODONSOFT',
   smsBalance: 4850,
   smsEnabled: true,
+  smsNotifyNewAppointment: true,
+  smsNotifyPaymentReceived: true,
   smsNotifyPaymentReminder: true,
   smsNotifyProjectUpdate: true,
   smsNotifyNewQuote: true,
@@ -1055,10 +1058,31 @@ export const INITIAL_SYSTEM_SETTINGS: SystemSettings = {
   notifyOnNewAppointment: true,
   notifyOnNewQuote: true,
   notifyOnPaymentReceived: true,
+  emailEnabled: true,
+  emailNotifyNewAppointment: true,
+  emailNotifyNewQuote: true,
+  emailNotifyPaymentReceived: true,
+  emailNotifyPaymentReminder: true,
+  emailNotifyProjectUpdate: true,
+  emailNotifyAppointmentReminder: true,
+  emailWelcomeSubject: 'Lodonsoft’a hoş geldiniz',
+  emailWelcomeTemplate: 'Merhaba {musteri_adi},\n\nLodonsoft’a hoş geldiniz. Talebinizi aldık; ekibimiz en kısa sürede sizinle iletişime geçecektir.\n\nLodonsoft',
   smtpHost: 'smtp.lodonsoft.com',
   smtpPort: 587,
   smtpUser: 'noreply@lodonsoft.com',
   smtpSenderName: 'Lodonsoft Mühendislik Bildirim',
+  emailAppointmentSubject: 'Randevu talebiniz alındı - Lodonsoft',
+  emailAppointmentTemplate: 'Merhaba {musteri_adi},\n\n{tarih} tarihinde saat {saat} için randevu talebinizi aldık. Ekibimiz randevunuzu onaylamak için sizinle iletişime geçecektir.\n\nLodonsoft',
+  emailQuoteSubject: 'Teklifiniz hazır - Lodonsoft',
+  emailQuoteTemplate: 'Merhaba {musteri_adi},\n\n{proje_adi} projeniz için teklifiniz hazır. Teklifinizi inceleyip onaylamak için: {teklif_linki}\n\nLodonsoft',
+  emailPaymentSubject: 'Ödemeniz alındı - Lodonsoft',
+  emailPaymentTemplate: 'Merhaba {musteri_adi},\n\n{proje_adi} projeniz için {tutar} tutarındaki ödemeniz alınmıştır. Teşekkür ederiz.\n\nLodonsoft',
+  emailPaymentReminderSubject: 'Ödeme hatırlatması - Lodonsoft',
+  emailPaymentReminderTemplate: 'Merhaba {musteri_adi},\n\n{proje_adi} projenize ait {tutar} tutarındaki ödemenin vadesi yaklaşmaktadır. Fatura: {fatura_linki}\n\nLodonsoft',
+  emailProjectUpdateSubject: 'Projenizde yeni gelişme var - Lodonsoft',
+  emailProjectUpdateTemplate: 'Merhaba {musteri_adi},\n\n{proje_adi} projenizin durumu güncellendi: {asama_adi}.\n\nLodonsoft',
+  emailAppointmentReminderSubject: 'Randevu hatırlatması - Lodonsoft',
+  emailAppointmentReminderTemplate: 'Merhaba {musteri_adi},\n\n{tarih} tarihinde saat {saat} için planlanan randevunuzu hatırlatırız.\n\nLodonsoft',
   paymentGatewayMode: 'live',
   enforce3dSecure: true,
 
@@ -1179,6 +1203,31 @@ Verileriniz, yasal mevzuatta öngörülen zamanaşımı süreleri ve şirket pol
   hideInternalTasksFromClient: false,
 };
 
+export const INITIAL_NOTIFICATION_LOGS: NotificationLogItem[] = [
+  {
+    id: 'notif-001',
+    event: 'randevu_hatirlatma',
+    channel: 'sms',
+    status: 'sent',
+    recipient: '+90 532 450 11 22',
+    subject: 'Randevu Hatırlatma',
+    message: 'Sayın Berk Taner, 15 Ekim 2026 saat 14:00 online proje keşif toplantınız için hazır olun.',
+    createdAt: '10 Ekim 2026, 12:30',
+    metadata: 'Netgsm',
+  },
+  {
+    id: 'notif-002',
+    event: 'teklif_onayi',
+    channel: 'email',
+    status: 'sent',
+    recipient: 'sarp@vortexmedya.com',
+    subject: 'Teklif Onayı',
+    message: 'Teklifiniz hazırlandı. Onay işleminize geçebilirsiniz.',
+    createdAt: '09 Ekim 2026, 16:40',
+    metadata: 'SMTP',
+  },
+];
+
 export const INITIAL_AUDIT_LOGS: AuditLogItem[] = [
   {
     id: 'aud-101',
@@ -1231,4 +1280,3 @@ export const INITIAL_AUDIT_LOGS: AuditLogItem[] = [
     details: 'Ücretsiz garanti SLA süresi 6 ay olarak teyit edildi.',
   },
 ];
-

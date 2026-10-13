@@ -9,7 +9,7 @@
       "leadArchitect": "Kaan Demir (Principal Tech Lead)",
       "totalBudget": 180000,
       "paidAmount": 120000,
-      "overallProgress": 46,
+      "overallProgress": 56,
       "currentStage": "development",
       "startDate": "2026-08-10",
       "estimatedDeliveryDate": "2026-11-20",
@@ -61,11 +61,10 @@
             "tr": "Döviz kuru grafikleri, cüzdan transferleri ve banka API servisleri.",
             "en": "Real-time charts, multi-currency transfers, and banking APIs."
           },
-          "progress": 75,
+          "progress": 82,
           "completed": false,
           "dueDate": "2026-10-25",
-          "startDate": "2026-09-16",
-          "completedDate": null
+          "startDate": "2026-09-16"
         },
         {
           "id": "m-4",

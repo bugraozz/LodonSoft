@@ -1,12 +1,10 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
 import {
-  GitBranch,
   Calendar,
   TrendingUp,
   Clock,
   ArrowRight,
-  Layers,
   DollarSign,
   Activity,
   CheckCircle2,
@@ -17,31 +15,13 @@ import {
 
 interface AdminStatsSummaryProps {
   onSelectTab?: (
-    tab: 'projects' | 'portfolio' | 'services' | 'appointments' | 'quotes' | 'invoices' | 'settings'
+    tab: 'portfolio' | 'services' | 'appointments' | 'quotes' | 'invoices' | 'settings'
   ) => void;
   activeTab?: string;
 }
 
 export const AdminStatsSummary: React.FC<AdminStatsSummaryProps> = ({ onSelectTab, activeTab }) => {
-  const { projects, appointments, invoices, quotes, language } = useApp();
-
-  // 1. Devam Eden Projelerin Sayısı (Active / In-progress Projects)
-  const ongoingProjects = projects.filter(
-    (p) => p.currentStage !== 'completed' && (p.overallProgress || 0) < 100
-  );
-  const completedProjects = projects.filter(
-    (p) => p.currentStage === 'completed' || (p.overallProgress || 0) >= 100
-  );
-  const ongoingCount = ongoingProjects.length;
-  const totalProjectsCount = projects.length;
-
-  const averageProgress =
-    ongoingProjects.length > 0
-      ? Math.round(
-          ongoingProjects.reduce((acc, p) => acc + (p.overallProgress || 0), 0) /
-            ongoingProjects.length
-        )
-      : 100;
+  const { appointments, invoices, quotes, language } = useApp();
 
   // 2. Bekleyen Randevular (Pending Appointments)
   const pendingAppointments = appointments.filter((a) => a.status === 'pending');
@@ -91,60 +71,8 @@ export const AdminStatsSummary: React.FC<AdminStatsSummaryProps> = ({ onSelectTa
 
   return (
     <div className="space-y-3">
-      {/* Kartlar Izgarası: 3 Ana Yönetim İstatistiği */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-        {/* ========================================================= */}
-        {/* KART 1: DEVAM EDEN PROJELER                               */}
-        {/* ========================================================= */}
-        <div
-          onClick={() => onSelectTab && onSelectTab('projects')}
-          className={`relative group rounded-2xl p-6 transition-all duration-300 border cursor-pointer overflow-hidden ${
-            activeTab === 'projects'
-              ? 'bg-gradient-to-br from-emerald-500/[0.08] to-emerald-950/[0.15] border-emerald-500/40 shadow-xl shadow-emerald-950/20 ring-1 ring-emerald-500/30'
-              : 'bg-[#0a0b10] hover:bg-[#0e0f17] border-white/[0.08] hover:border-emerald-500/30 shadow-lg'
-          }`}
-        >
-          {/* Arka plan ışıltısı */}
-          <div className="absolute -top-12 -right-12 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all pointer-events-none" />
-
-          <div className="flex items-start justify-between gap-3 mb-4">
-            <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 group-hover:scale-105 transition-transform">
-              <GitBranch className="w-6 h-6" />
-            </div>
-
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[11px] font-mono font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Aktif Projeler</span>
-            </span>
-          </div>
-
-          <div className="space-y-1">
-            <div className="text-xs font-mono uppercase tracking-wider text-[#8a8f98]">
-              Devam Eden Projeler
-            </div>
-            <div className="flex items-baseline gap-2">
-              <span className="text-3xl sm:text-4xl font-extrabold font-mono text-white tracking-tight">
-                {ongoingCount}
-              </span>
-              <span className="text-xs font-mono text-[#8a8f98]">
-                / {totalProjectsCount} Toplam
-              </span>
-            </div>
-          </div>
-
-          {/* Alt Bilgi Çubuğu */}
-          <div className="mt-4 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs text-[#8a8f98]">
-            <div className="flex items-center gap-1.5 font-mono text-[11px]">
-              <Layers className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Ort. İlerleme: <strong className="text-white">%{averageProgress}</strong></span>
-            </div>
-            <div className="flex items-center gap-1 text-emerald-400 font-medium group-hover:translate-x-0.5 transition-transform text-[11px]">
-              <span>Yönet</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </div>
-          </div>
-        </div>
-
+      {/* Kartlar Izgarası: 2 Ana Yönetim İstatistiği */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {/* ========================================================= */}
         {/* KART 2: BEKLEYEN RANDEVULAR                               */}
         {/* ========================================================= */}
@@ -279,10 +207,6 @@ export const AdminStatsSummary: React.FC<AdminStatsSummaryProps> = ({ onSelectTa
         </div>
 
         <div className="flex items-center gap-4 flex-wrap">
-          <span className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span>{completedProjects.length} Tamamlanan Proje</span>
-          </span>
           <span className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
             <span>{pendingQuotesCount} Değerlendirilen Teklif</span>

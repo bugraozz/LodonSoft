@@ -17,6 +17,7 @@ import {
   TestimonialItem,
   SystemSettings,
   AuditLogItem,
+  NotificationLogItem,
 } from '../types';
 import {
   INITIAL_APPOINTMENTS,
@@ -31,6 +32,7 @@ import {
   PRESET_GOOGLE_SAMPLE_REVIEWS,
   INITIAL_SYSTEM_SETTINGS,
   INITIAL_AUDIT_LOGS,
+  INITIAL_NOTIFICATION_LOGS,
 } from '../data/initialData';
 import { translations } from '../i18n/translations';
 
@@ -67,11 +69,13 @@ interface AppContextType {
 
   // System Settings & Audit Logs
   systemSettings: SystemSettings;
-  updateSystemSettings: (updated: Partial<SystemSettings>) => void;
+  updateSystemSettings: (updated: Partial<SystemSettings>) => Promise<void>;
   resetSystemSettings: () => void;
   auditLogs: AuditLogItem[];
   addAuditLog: (log: Omit<AuditLogItem, 'id' | 'timestamp'>) => void;
   clearAuditLogs: () => void;
+  notificationLogs: NotificationLogItem[];
+  sendTestNotification: (channel: 'sms' | 'email' | 'whatsapp', event?: string) => void;
 
   // Portfolio & Site Content Management Actions
   addPortfolioProject: (project: Omit<ProjectItem, 'id'>) => void;
@@ -337,6 +341,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return saved ? JSON.parse(saved) : INITIAL_AUDIT_LOGS;
   });
 
+  const [notificationLogs, setNotificationLogs] = useState<NotificationLogItem[]>(() => {
+    const saved = localStorage.getItem('lodonsoft_notification_logs');
+    return saved ? JSON.parse(saved) : INITIAL_NOTIFICATION_LOGS;
+  });
+
   useEffect(() => {
     localStorage.setItem('lodonsoft_settings', JSON.stringify(systemSettings));
   }, [systemSettings]);
@@ -344,6 +353,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   useEffect(() => {
     localStorage.setItem('lodonsoft_audit_logs', JSON.stringify(auditLogs));
   }, [auditLogs]);
+
+  useEffect(() => {
+    localStorage.setItem('lodonsoft_notification_logs', JSON.stringify(notificationLogs));
+  }, [notificationLogs]);
 
   const addAuditLog = (log: Omit<AuditLogItem, 'id' | 'timestamp'>) => {
     const now = new Date();
@@ -362,13 +375,129 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setAuditLogs((prev) => [newEntry, ...prev.slice(0, 49)]);
   };
 
-  const updateSystemSettings = (updated: Partial<SystemSettings>) => {
-    setSystemSettings((prev) => ({ ...prev, ...updated }));
-    fetch('/api/settings', {
+  const sendTestNotification = (channel: 'sms' | 'email' | 'whatsapp', event: string = 'manual_test') => {
+    const ts = new Date();
+    const messageMap = {
+      sms: systemSettings.smsPaymentTemplate || 'Test SMS: Lodonsoft bildirim sistemi aktif.',
+      email: 'Test e-posta bildirimi: Müşteri iletişim sisteminiz başarıyla çalışıyor.',
+      whatsapp: systemSettings.whatsappTemplateTr || 'Merhaba, test bildirimi başarıyla gönderildi.',
+    };
+
+    const newEntry: NotificationLogItem = {
+      id: `notif-${Date.now()}`,
+      event,
+      channel,
+      status: 'sent',
+      recipient: channel === 'email' ? systemSettings.supportEmail : systemSettings.phone,
+      subject: channel === 'email' ? 'Test Bildirimi' : 'Bildirim Testi',
+      message: messageMap[channel],
+      createdAt: ts.toLocaleString('tr-TR', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+      metadata: `${systemSettings.smsProvider || 'NETGSM'} / Test`,
+    };
+
+    setNotificationLogs((prev) => [newEntry, ...prev].slice(0, 25));
+    addAuditLog({
+      action: `${channel.toUpperCase()} test bildirimi gönderildi`,
+      category: 'system',
+      actor: 'admin@lodonsoft.com',
+      ipAddress: '185.122.90.14',
+      status: 'success',
+      details: `${event} örnek bildirimi iletildi.`,
+    });
+  };
+
+  const triggerNotification = (
+    event: string,
+    payload: {
+      recipientName?: string;
+      recipientEmail?: string;
+      recipientPhone?: string;
+      projectName?: string;
+      amount?: number;
+      date?: string;
+      time?: string;
+      subject?: string;
+      template?: string;
+    }
+  ) => {
+    const safeText = (value?: string) => value || '';
+    const channelConfigs = [
+      {
+        channel: 'sms' as const,
+        enabled: Boolean(systemSettings.smsEnabled && systemSettings.smsProvider),
+        recipient: payload.recipientPhone || systemSettings.phone,
+        subject: 'SMS Bildirimi',
+        message:
+          payload.template ||
+          systemSettings.smsPaymentTemplate ||
+          'Lodonsoft bildirimi: İşleminiz başarıyla tamamlandı.',
+      },
+      {
+        channel: 'email' as const,
+        enabled: Boolean(systemSettings.emailEnabled && systemSettings.smtpHost && systemSettings.smtpUser),
+        recipient: payload.recipientEmail || systemSettings.supportEmail,
+        subject: payload.subject || 'Lodonsoft Bildirimi',
+        message: payload.template || 'Müşteri bilgilendirme sisteminiz aktif.',
+      },
+      {
+        channel: 'whatsapp' as const,
+        enabled: Boolean(systemSettings.whatsappAutoResponder),
+        recipient: payload.recipientPhone || systemSettings.whatsappNumber,
+        subject: 'WhatsApp Bildirimi',
+        message: systemSettings.whatsappTemplateTr || 'Merhaba, bilgilerinizi kontrol ediyoruz.',
+      },
+    ];
+
+    const created = channelConfigs
+      .filter((item) => item.enabled)
+      .map((item) => ({
+        id: `notif-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
+        event,
+        channel: item.channel,
+        status: 'sent' as const,
+        recipient: item.recipient,
+        subject: item.subject,
+        message: item.message,
+        createdAt: new Date().toLocaleString('tr-TR', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+        }),
+        metadata: payload.projectName || 'otomasyon',
+      }));
+
+    if (created.length > 0) {
+      setNotificationLogs((prev) => [...created, ...prev].slice(0, 25));
+      addAuditLog({
+        action: `${event} otomatik bildirim gönderildi`,
+        category: 'system',
+        actor: 'automation@lodonsoft.com',
+        ipAddress: 'system',
+        status: 'success',
+        details: created.map((item) => `${item.channel.toUpperCase()}: ${item.recipient}`).join(' | '),
+      });
+    }
+  };
+
+  const updateSystemSettings = async (updated: Partial<SystemSettings>) => {
+    const response = await fetch('/api/settings', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updated),
-    }).catch(() => {});
+    });
+    if (!response.ok) {
+      throw new Error(`Ayarlar kaydedilemedi (HTTP ${response.status}).`);
+    }
+    const savedSettings = (await response.json()) as Partial<SystemSettings>;
+    setSystemSettings((prev) => ({ ...prev, ...savedSettings }));
     addAuditLog({
       action: 'Sistem Parametreleri Güncellendi',
       category: 'system',
@@ -1362,6 +1491,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         auditLogs,
         addAuditLog,
         clearAuditLogs,
+        notificationLogs,
+        sendTestNotification,
         addPortfolioProject,
         updatePortfolioProject,
         deletePortfolioProject,
