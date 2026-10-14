@@ -37,7 +37,7 @@ export const ServicesSection: React.FC = () => {
   };
 
   return (
-    <section id="services" className="py-24 bg-[#050506] border-b border-white/[0.08]">
+    <section id="services" className="py-24 bg-[#050506] ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div

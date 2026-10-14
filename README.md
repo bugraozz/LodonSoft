@@ -1,20 +1,31 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Lodonsoft
 
-# Run and deploy your AI Studio app
+Lodonsoft is a full-stack React application served by an Express backend. Local development uses a JSON file database by default, so PostgreSQL credentials are not required.
 
-This contains everything you need to run your app locally.
+## Requirements
 
-View your app in AI Studio: https://ai.studio/apps/5948d203-4c33-4216-a3b7-1f67c50c53ac
+- Node.js 20.19+ or 22.12+
+- npm
 
-## Run Locally
+## Run locally
 
-**Prerequisites:**  Node.js
+```powershell
+npm install
+npm run dev
+```
 
+Open <http://localhost:3000>. The API health check is available at <http://localhost:3000/api/health>.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Application data is stored in `data/db.json`. The server creates the file and seeds it with the initial sample data if it does not exist. To use PostgreSQL for project tracker data, copy `.env.example` to `.env`, fill in the PostgreSQL connection settings, and start the app again. Other application data continues to use the JSON file.
+
+Set `PORT` in `.env` to use a different local port.
+
+## Production
+
+```powershell
+npm run build
+$env:NODE_ENV = "production"
+npm start
+```
+
+Set `NODE_ENV=production` before `npm start` to serve the built frontend and API from the same Express server.

@@ -26,7 +26,7 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-[#050506]/85 backdrop-blur-xl border-b border-white/[0.08]">
+    <header className="sticky top-0 z-40 bg-transparent  ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-8 h-16">
           {/* Zone 1: Single text element wordmark */}
@@ -86,19 +86,9 @@ export const Navbar: React.FC = () => {
 
           {/* Zone 3: 1 primary action + Language toggle + Theme toggle + Admin */}
           <div className="flex items-center gap-2.5 shrink-0">
-            {/* Linear Theme Palette Pill */}
-            <button
-              onClick={toggleTheme}
-              className="px-2.5 py-1 rounded-lg bg-[#111216] border border-white/[0.08] text-[#8a8f98] hover:text-white hover:border-white/[0.18] transition-colors cursor-pointer flex items-center gap-1.5 shrink-0"
-              aria-label="Linear Dark Mode"
-              title="Linear Dark Mode"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)] animate-pulse"></span>
-              <span className="hidden lg:inline text-[11px] font-mono text-[#8a8f98]">Linear Dark</span>
-            </button>
 
             {/* Language Switcher */}
-            <div className="flex items-center bg-[#111216] border border-white/[0.08] rounded-lg p-0.5 text-xs">
+            <div className="flex items-center bg-[#111216]  rounded-lg p-0.5 text-xs">
               <button
                 onClick={() => setLanguage('tr')}
                 className={`px-2 py-1 font-semibold rounded-md transition-colors cursor-pointer text-[11px] ${

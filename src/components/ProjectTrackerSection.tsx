@@ -65,7 +65,7 @@ export const ProjectTrackerSection: React.FC = () => {
   const hasResult = Boolean(currentProject);
 
   return (
-    <section id="tracker" className="py-20 lg:py-28 bg-[#050506] border-b border-white/[0.08] min-h-[750px] relative">
+    <section id="tracker" className="py-20 lg:py-28 bg-[#050506]  min-h-[750px] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs uppercase tracking-widest text-[#8a8f98] font-semibold mb-3">

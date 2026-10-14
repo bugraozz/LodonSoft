@@ -56,7 +56,7 @@ export const ProcessSection: React.FC = () => {
     },
   ];
   return (
-    <section id="process" className="py-16 sm:py-20 bg-[#050506] border-b border-white/[0.08] relative overflow-hidden">
+    <section id="process" className="py-16 sm:py-20 bg-[#050506]  relative overflow-hidden">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Compact Section Header */}
         <motion.div

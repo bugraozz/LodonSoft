@@ -29,7 +29,7 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative w-full min-h-[calc(100vh-4rem)] min-h-[calc(100dvh-4rem)] flex flex-col justify-between items-center overflow-hidden border-b border-white/[0.08] linear-glow-hero px-4 py-8 sm:py-12">
+    <section className="relative w-full min-h-[calc(100vh-4rem)] min-h-[calc(100dvh-4rem)] flex flex-col justify-between items-center overflow-hidden   linear-glow-hero px-4 py-8 sm:py-12">
       {/* Top spacer to guarantee perfect optical vertical centering */}
       <div className="w-full h-4 hidden sm:block" />
 

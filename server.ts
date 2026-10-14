@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import http from 'http';
 import { createServer as createViteServer } from 'vite';
@@ -25,9 +26,12 @@ async function startServer() {
   const server = http.createServer(app);
   const PORT = Number(process.env.PORT) || 3000;
 
-  // Initialize PostgreSQL if configured
+  // Initialize PostgreSQL before accepting requests so API calls cannot race table creation.
   if (isPostgresConfigured()) {
-    initPostgresTables().catch((e) => console.warn('[PostgreSQL Init Notice]:', e.message));
+    const initialized = await initPostgresTables();
+    if (!initialized) {
+      console.warn('[PostgreSQL] Continuing with the JSON file store.');
+    }
   }
 
   // Middleware

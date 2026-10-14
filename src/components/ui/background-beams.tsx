@@ -89,9 +89,9 @@ export const BackgroundBeams = React.memo(
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(352 34) rotate(90) scale(555 1560.62)"
             >
-              <stop offset="0.0666667" stopColor="#d4d4d4"></stop>
-              <stop offset="0.3" stopColor="#d4d4d4"></stop>
-              <stop offset="0.55" stopColor="white" stopOpacity="0"></stop>
+              <stop offset="0.0666667" stopColor="gray"></stop>
+              <stop offset="0.3" stopColor="gray"></stop>
+              <stop offset="0.55" stopColor="gray" stopOpacity="0"></stop>
             </radialGradient>
           </defs>
         </svg>

@@ -323,7 +323,7 @@ export const TestimonialsSection: React.FC = () => {
   }, [testimonials, activeFilter, language]);
 
   return (
-    <section id="testimonials" className="py-24 bg-[#08090a] border-b border-[#23252a] relative font-sans text-[#d0d6e0] overflow-hidden">
+    <section id="testimonials" className="py-24 bg-[#050506]  relative font-sans text-[#d0d6e0] overflow-hidden">
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ================= 1. HEADER ================= */}

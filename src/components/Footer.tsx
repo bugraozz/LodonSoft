@@ -11,12 +11,12 @@ export const Footer: React.FC = () => {
   const phone = systemSettings?.phone || '+90 (212) 890 40 50';
 
   return (
-    <footer className="relative bg-[#060709] border-t border-white/[0.08] text-[#9ca3af] overflow-hidden selection:bg-white/20 selection:text-white">
+    <footer className="relative bg-[#050506] border-b border-white/[0.08] text-[#c4cad4] overflow-hidden selection:bg-white/20 selection:text-white">
       {/* Aceternity Vertical Scales Background */}
       <Scales
         orientation="vertical"
-        size={24}
-        color="rgba(255, 255, 255, 0.05)"
+        size={22}
+        color="rgba(255, 255, 255, 0.08)"
         className="opacity-70 [mask-image:radial-gradient(ellipse_80%_60%_at_50%_0%,black_30%,transparent_100%)] pointer-events-none"
       />
 
